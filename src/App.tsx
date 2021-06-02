@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Navigation from "./components/Navigation";
+import PokemonDetails from "./PokemonDetails";
 
-type Pokemon = {
+export type Pokemon = {
   id: number;
   name: string;
+  height: number;
   weight: number;
   sprites: Sprite;
   stats: Array<Stats>;
@@ -23,7 +25,7 @@ type Sprite = {
 };
 
 type Stats = {
-  base_state: number;
+  base_stat: number;
   effort: number;
   stat: Stat;
 };
@@ -54,14 +56,15 @@ const App = () => {
 
   const fetchPokemon = (name: string) => {
     axios
-      .get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${name}/`)
+      .get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}/`)
       .then((response) => {
-        const { id, name, weight, sprites, stats, types }: Pokemon =
+        const { id, name, height, weight, sprites, stats, types }: Pokemon =
           response.data;
 
         setPokemon({
           id: id,
           name: name,
+          height: height,
           weight: weight,
           sprites: sprites,
           stats: stats,
@@ -96,7 +99,7 @@ const App = () => {
             </button>
           </div>
         </form>
-        <div className=""></div>
+        <PokemonDetails data={pokemon} />
       </div>
     </>
   );
