@@ -1,10 +1,75 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Navigation from "./components/Navigation";
 
+type Pokemon = {
+  id: number;
+  name: string;
+  weight: number;
+  sprites: Sprite;
+  stats: Array<Stats>;
+  types: Array<Types>;
+};
+
+type Sprite = {
+  back_default: string;
+  back_female: string;
+  back_shiny: string;
+  back_shiny_female: string;
+  front_default: string;
+  front_female: string;
+  front_shiny: string;
+  front_shiny_female: string;
+};
+
+type Stats = {
+  base_state: number;
+  effort: number;
+  stat: Stat;
+};
+
+type Stat = {
+  name: string;
+  url: string;
+};
+
+type Types = {
+  slot: number;
+  type: Type;
+};
+
+type Type = {
+  name: string;
+  url: string;
+};
+
 const App = () => {
-  const [pokemon_name, setPokemonName] = useState("");
+  const [name, setName] = useState("");
+  const [pokemon, setPokemon] = useState<Pokemon | undefined>(undefined);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    fetchPokemon(name);
+  };
+
+  const fetchPokemon = (name: string) => {
+    axios
+      .get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${name}/`)
+      .then((response) => {
+        const { id, name, weight, sprites, stats, types }: Pokemon =
+          response.data;
+
+        setPokemon({
+          id: id,
+          name: name,
+          weight: weight,
+          sprites: sprites,
+          stats: stats,
+          types: types,
+        });
+
+        console.log(pokemon);
+      });
   };
 
   return (
@@ -19,8 +84,8 @@ const App = () => {
           <input
             className="bg-gray-100 py-2 px-2 mt-2"
             placeholder="test"
-            value={pokemon_name}
-            onChange={(e) => setPokemonName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <div className="flex flex-row justify-end">
             <button
@@ -31,6 +96,7 @@ const App = () => {
             </button>
           </div>
         </form>
+        <div className=""></div>
       </div>
     </>
   );
