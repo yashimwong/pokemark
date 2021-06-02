@@ -35,12 +35,12 @@ type Stat = {
   url: string;
 };
 
-type Types = {
+export type Types = {
   slot: number;
   type: Type;
 };
 
-type Type = {
+export type Type = {
   name: string;
   url: string;
 };
