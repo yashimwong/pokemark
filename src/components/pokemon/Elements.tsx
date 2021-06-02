@@ -53,7 +53,7 @@ const element_color: { [key: string]: string } = {
   fire: "yellow-500",
   flying: "blue-100",
   ghost: "purple-200",
-  grass: "green-200",
+  grass: "green-300",
   ground: "yellow-900",
   ice: "blue-900",
   normal: "gray-200",
