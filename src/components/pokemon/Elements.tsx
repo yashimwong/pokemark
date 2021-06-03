@@ -44,28 +44,28 @@ type ElementProps = {
 };
 
 const element_color: { [key: string]: string } = {
-  bug: "green-500",
-  dark: "gray-600",
-  dragon: "blue-600",
-  electric: "yellow-300",
-  fairy: "pink-400",
-  fighting: "red-600",
-  fire: "yellow-500",
-  flying: "blue-100",
-  ghost: "purple-200",
-  grass: "green-300",
-  ground: "yellow-900",
-  ice: "blue-900",
-  normal: "gray-200",
-  poison: "purple-800",
-  psychic: "pink-800",
-  rock: "yellow-500",
-  steel: "gray-400",
-  water: "blue-500",
+  bug: "text-green-500",
+  dark: "text-gray-600",
+  dragon: "text-blue-600",
+  electric: "text-yellow-300",
+  fairy: "text-pink-400",
+  fighting: "text-red-600",
+  fire: "text-yellow-500",
+  flying: "text-blue-100",
+  ghost: "text-purple-200",
+  grass: "text-green-300",
+  ground: "text-yellow-900",
+  ice: "text-blue-900",
+  normal: "text-gray-200",
+  poison: "text-purple-800",
+  psychic: "text-pink-800",
+  rock: "text-yellow-500",
+  steel: "text-gray-400",
+  water: "text-blue-500",
 };
 
 const getClassName = (name: string) => {
-  return `fill-current text-${element_color[name]}`;
+  return `fill-current ${element_color[name]}`;
 };
 
 const getImage = (ele_name: string) => {
