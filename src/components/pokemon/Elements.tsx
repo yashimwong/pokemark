@@ -1,4 +1,4 @@
-import { Types } from "../../App";
+import { Types } from "../../types/pokemon";
 import { ReactComponent as Bug } from "../../images/bug.svg";
 import { ReactComponent as Dark } from "../../images/dark.svg";
 import { ReactComponent as Dragon } from "../../images/dragon.svg";

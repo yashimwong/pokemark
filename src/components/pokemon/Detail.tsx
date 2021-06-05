@@ -1,5 +1,5 @@
-import { Pokemon } from "./App";
-import Elements from "./components/pokemon/Elements";
+import Elements from "./Elements";
+import { Pokemon } from "../../types/pokemon";
 
 type PokemonDetailsProps = {
   data?: Pokemon;
