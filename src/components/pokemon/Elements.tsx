@@ -17,6 +17,7 @@ import { ReactComponent as Psychic } from "../../images/psychic.svg";
 import { ReactComponent as Rock } from "../../images/rock.svg";
 import { ReactComponent as Steel } from "../../images/steel.svg";
 import { ReactComponent as Water } from "../../images/water.svg";
+import React from "react";
 
 enum Element {
   Bug = "bug",
@@ -70,8 +71,8 @@ const getClassName = (name: string) => {
 
 const getImage = (ele_name: string) => {
   const props = {
-    width: "30",
-    height: "30",
+    width: "18",
+    height: "18",
     className: getClassName(ele_name),
   };
 
@@ -97,9 +98,17 @@ const getImage = (ele_name: string) => {
 
 const Elements = ({ data }: ElementProps) => {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row justify-end flex-nowrap w-80">
       {data.map((type) => {
-        return getImage(type.type.name);
+        return (
+          <div
+            className="flex flex-row items-center justify-center border-2 rounded-lg px-2 py-1 first:mr-2"
+            key={type.type.name}
+          >
+            <p className="capitalize mr-1">{type.type.name}</p>{" "}
+            {getImage(type.type.name)}
+          </div>
+        );
       })}
     </div>
   );
