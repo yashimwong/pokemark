@@ -1,11 +1,11 @@
 import Elements from "./Elements";
 import { Pokemon } from "../../types/pokemon";
 
-type PokemonDetailsProps = {
+type DetailsProps = {
   data?: Pokemon;
 };
 
-const PokemonDetails = ({ data: pokemon }: PokemonDetailsProps) => {
+const Details = ({ data: pokemon }: DetailsProps) => {
   if (!pokemon) return <></>;
 
   return (
@@ -63,4 +63,4 @@ const PokemonDetails = ({ data: pokemon }: PokemonDetailsProps) => {
   );
 };
 
-export default PokemonDetails;
+export default Details;
