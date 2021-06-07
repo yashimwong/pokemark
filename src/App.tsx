@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import Navigation from "./components/Navigation";
 import PokemonDetails from "./components/pokemon/Detail";
+import Loading from "./components/Loading";
 import { Pokemon } from "./types/pokemon";
 
 const App = () => {
   const [name, setName] = useState("");
+  const [is_loading, setLoading] = useState(false);
   const [pokemon, setPokemon] = useState<Pokemon | undefined>(undefined);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -30,8 +32,12 @@ const App = () => {
           types: types,
         });
 
-        console.log(pokemon);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       });
+
+    setLoading(true);
   };
 
   return (
@@ -58,7 +64,7 @@ const App = () => {
             </button>
           </div>
         </form>
-        <PokemonDetails data={pokemon} />
+        {is_loading ? <Loading /> : <PokemonDetails data={pokemon} />}
       </div>
     </>
   );

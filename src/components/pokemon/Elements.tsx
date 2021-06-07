@@ -17,7 +17,6 @@ import { ReactComponent as Psychic } from "../../images/psychic.svg";
 import { ReactComponent as Rock } from "../../images/rock.svg";
 import { ReactComponent as Steel } from "../../images/steel.svg";
 import { ReactComponent as Water } from "../../images/water.svg";
-import React from "react";
 
 enum Element {
   Bug = "bug",
