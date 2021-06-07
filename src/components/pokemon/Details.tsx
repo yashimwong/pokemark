@@ -9,9 +9,9 @@ const Details = ({ data: pokemon }: DetailsProps) => {
   if (!pokemon) return <></>;
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex flex-col shadow-lg my-4 w-max lg:py-12 lg:px-10 p-6 rounded-lg">
-        <div className="flex flex-row">
+    <div className="flex flex-col items-center w-full">
+      <div className="flex flex-col items-center shadow-lg my-4 lg:py-12 lg:px-10 rounded-lg lg:w-max w-11/12">
+        <div className="flex flex-row mt-6 lg:mt-0">
           <h1 className="text-4xl font-semibold uppercase mr-2">
             {pokemon.name}
           </h1>
