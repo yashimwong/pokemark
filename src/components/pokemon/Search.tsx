@@ -9,7 +9,7 @@ type SearchProps = {
 const Search = ({ handleSubmit, setName, name }: SearchProps) => {
   return (
     <form
-      className="flex flex-col shadow-lg w-4/12 mt-4 py-12 px-8 rounded-lg"
+      className="flex flex-col shadow-lg md:w-6/12 w-11/12 mt-4 py-12 px-8 rounded-lg"
       onSubmit={handleSubmit}
     >
       <h1>Enter Pokemon Name:</h1>

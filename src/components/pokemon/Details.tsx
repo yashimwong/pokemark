@@ -10,34 +10,34 @@ const Details = ({ data: pokemon }: DetailsProps) => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex flex-col shadow-lg mt-4 w-max py-12 px-10 rounded-lg">
+      <div className="flex flex-col shadow-lg my-4 w-max lg:py-12 lg:px-10 p-6 rounded-lg">
         <div className="flex flex-row">
           <h1 className="text-4xl font-semibold uppercase mr-2">
             {pokemon.name}
           </h1>
           <Elements data={pokemon.types} />
         </div>
-        <div className="flex flex-row mt-6">
-          <div className="flex flex-col w-1/2">
+        <div className="flex lg:flex-row flex-col mt-6">
+          <div className="flex flex-col lg:w-1/2 w-full">
             <img
               src={pokemon.sprites.front_default}
               alt={pokemon.name + " default sprite"}
             />
             <div className="flex flex-row items-center flex-nowrap mb-1">
-              <div className="border-none bg-gray-700 text-gray-50 text-sm rounded py-1 w-14 text-center mr-2">
+              <div className="border-none bg-gray-700 text-gray-50 text-sm rounded py-1 lg:w-14 w-1/2 text-center mr-2">
                 Height
               </div>
               {pokemon.height * 0.1}m
             </div>
             <div className="flex flex-row items-center flex-nowrap">
-              <div className="border-none bg-gray-700 text-gray-50 text-sm rounded py-1 w-14 text-center mr-2">
+              <div className="border-none bg-gray-700 text-gray-50 text-sm rounded py-1 lg:w-14 w-1/2 text-center mr-2">
                 Weight
               </div>
               {pokemon.weight * 0.1}
               kg
             </div>
           </div>
-          <div className="flex flex-col w-1/2">
+          <div className="flex flex-col lg:w-1/2 w-full lg:my-0 my-4">
             <h2 className="text-2xl font-semibold capitalize mb-2">
               Basic Status
             </h2>

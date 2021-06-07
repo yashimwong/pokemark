@@ -97,7 +97,7 @@ const getImage = (ele_name: string) => {
 
 const Elements = ({ data }: ElementProps) => {
   return (
-    <div className="flex flex-row justify-end flex-nowrap w-80">
+    <div className="flex flex-row justify-end flex-nowrap">
       {data.map((type) => {
         return (
           <div
