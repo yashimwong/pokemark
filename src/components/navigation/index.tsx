@@ -1,1 +1,1 @@
-export { default as MainNavigationBar } from "./main-navbar";
+export { default as SideBar } from "./side-bar";
