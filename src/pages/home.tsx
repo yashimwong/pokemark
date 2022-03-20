@@ -1,22 +1,14 @@
 import React from "react";
-import { PokemonList } from "types/pokemon";
 import { GlobalContext, GlobaDataType } from "stores/global-data";
+import AutoComplete from "components/input/autocomplete";
 
 const Home = () => {
     const { pokemon_list }: GlobaDataType = React.useContext(GlobalContext);
 
     return (
-        <div>
+        <div className="">
             <h1 className="text-2xl">Homepage</h1>
-            <select>
-                {pokemon_list.map(({ name, url }: PokemonList) => {
-                    return (
-                        <option key={name} value={url}>
-                            {name}
-                        </option>
-                    );
-                })}
-            </select>
+            <AutoComplete data={pokemon_list.map((p) => ({ key: p.name, value: p.url }))} />
         </div>
     );
 };
