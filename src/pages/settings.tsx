@@ -1,11 +1,11 @@
 import MainContainer from "components/layout/container";
 
-const Home = () => {
+const Settings = () => {
     return (
         <MainContainer>
-            <h1 className="text-2xl">Homepage</h1>
+            <h1 className="text-2xl">Settings</h1>
         </MainContainer>
     );
 };
 
-export default Home;
+export default Settings;
