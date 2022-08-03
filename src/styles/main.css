@@ -55,3 +55,48 @@ button:disabled {
     background: #eef2ff;
     border-color: #818cf8;
 }
+
+.map-frame {
+    border: 5px solid #334155;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 3px #f8fafc;
+}
+
+.world-map {
+    display: grid;
+    aspect-ratio: 4 / 3;
+    min-height: 270px;
+}
+
+.map-tile {
+    align-items: center;
+    display: flex;
+    font-size: clamp(0.65rem, 2vw, 1.25rem);
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.tile-path { background: #e8d4a9; }
+.tile-grass { background: #86c85b; color: #4d923f; }
+.tile-tree { background: #356f3d; color: #19532d; }
+.tile-water { background: #5aaee5; color: #a9dfff; }
+.tile-flower { background: #85c75b; color: #f9d5e8; }
+.tile-sign { background: #e8d4a9; color: #7a4e2f; font-weight: 900; }
+.tile-lab { background: #d5e7f2; color: #5f7281; }
+.tile-healing { background: #f5d2da; color: #d2475f; font-weight: 900; }
+.tile-bridge { background: #a8784a; }
+
+.map-player,
+.map-trainer {
+    border-radius: 9999px;
+    bottom: 12%;
+    height: 54%;
+    position: absolute;
+    text-indent: -9999px;
+    width: 42%;
+}
+
+.map-player { background: #4f46e5; border: 2px solid #fff; }
+.map-trainer { background: #ef4444; border: 2px solid #7f1d1d; }
