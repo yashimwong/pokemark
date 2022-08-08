@@ -100,3 +100,78 @@ button:disabled {
 
 .map-player { background: #4f46e5; border: 2px solid #fff; }
 .map-trainer { background: #ef4444; border: 2px solid #7f1d1d; }
+
+.battle-scene {
+    background: linear-gradient(155deg, #dff4ff 0%, #f8fbff 50%, #d8edcc 51%, #b5da98 100%);
+}
+
+.battle-header {
+    align-items: center;
+    background: rgba(15, 23, 42, 0.94);
+    color: #fff;
+    display: flex;
+    font-size: 0.75rem;
+    font-weight: 800;
+    justify-content: space-between;
+    letter-spacing: 0.08em;
+    padding: 0.9rem 1.25rem;
+    text-transform: uppercase;
+}
+
+.battle-sprite {
+    align-items: center;
+    border-radius: 50%;
+    display: flex;
+    flex: 0 0 auto;
+    font-size: 4rem;
+    height: 7rem;
+    justify-content: center;
+    width: 7rem;
+}
+
+.battle-status {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #dbe2f0;
+    border-radius: 0.9rem;
+    max-width: 21rem;
+    min-width: 12rem;
+    padding: 0.85rem 1rem;
+    width: 55%;
+}
+
+.battle-dialogue {
+    background: rgba(255, 255, 255, 0.97);
+    border-top: 2px solid #dbe2f0;
+}
+
+.move-button,
+.battle-option {
+    align-items: center;
+    background: #fff;
+    border: 2px solid #dbe2f0;
+    border-radius: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    min-height: 3.8rem;
+    padding: 0.65rem 0.85rem;
+    text-align: left;
+}
+
+.move-button:hover,
+.battle-option:hover {
+    background: #eef2ff;
+    border-color: #818cf8;
+}
+
+.move-button small {
+    color: #64748b;
+    display: block;
+    font-size: 0.7rem;
+    margin-top: 0.1rem;
+}
+
+.battle-option {
+    color: #3730a3;
+    font-size: 0.875rem;
+    font-weight: 800;
+}
