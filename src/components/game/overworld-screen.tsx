@@ -1,6 +1,7 @@
 import MovementControls from "components/game/movement-controls";
 import OverworldMap from "components/game/overworld-map";
 import PokemonCard from "components/game/pokemon-card";
+import WorldLegend from "components/game/world-legend";
 import { GameState } from "game/types";
 
 const OverworldScreen = ({ game, onMove, onOpenRoster }: { game: GameState; onMove: (dx: number, dy: number) => void; onOpenRoster: () => void }) => (
@@ -9,6 +10,7 @@ const OverworldScreen = ({ game, onMove, onOpenRoster }: { game: GameState; onMo
             <div className="flex flex-wrap items-center gap-3 mb-5"><div><p className="text-xs font-bold uppercase tracking-wider text-indigo-600">Meadow Town</p><h1 className="text-2xl font-black">Explore, {game.trainerName}</h1></div><div className="ml-auto text-right"><p className="font-bold text-amber-600">◉ {game.money}</p><p className="text-xs text-slate-500">{game.badges.length} badge{game.badges.length === 1 ? "" : "s"}</p></div></div>
             <OverworldMap game={game} onMove={onMove} />
             <p className="mt-4 text-center text-sm text-slate-500">Use arrow keys, WASD, or the controls to move. Walk in tall grass to find Pokémon.</p>
+            <WorldLegend />
             <MovementControls onMove={onMove} />
         </section>
         <aside className="game-panel p-5">
