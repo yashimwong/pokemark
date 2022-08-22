@@ -20,6 +20,7 @@ export type PokemonSpecies = {
     types: PokemonType[];
     color: string;
     sprite: string;
+    artwork: string;
     baseHp: number;
     attack: number;
     defense: number;
