@@ -1,16 +1,21 @@
 import { NavLink } from "react-router-dom";
+import { FiBookOpen, FiCompass, FiHexagon, FiSliders } from "react-icons/fi";
 
 const NavigationBar = () => {
-    const linkClass = ({ isActive }: { isActive: boolean }) => `px-3 py-1.5 rounded-lg text-sm font-bold transition ${isActive ? "bg-white text-slate-900" : "text-slate-300 hover:text-white"}`;
+    const linkClass = ({ isActive }: { isActive: boolean }) => `navigation-link ${isActive ? "navigation-link-active" : ""}`;
     return (
-        <nav className="fixed top-0 z-20 w-full h-14 inline-flex justify-center items-center bg-slate-950 text-white shadow-lg">
-            <div className="w-11/12 max-w-6xl inline-flex items-center">
-                <div className="text-xl font-black tracking-tight">⚡ PokeMark</div>
-                <ul className="inline-flex items-center gap-1 ml-auto">
-                    <li><NavLink to="/" className={linkClass}>Adventure</NavLink></li>
-                    <li><NavLink to="/roster" className={linkClass}>Roster</NavLink></li>
-                    <li><NavLink to="/settings" className={linkClass}>Journal</NavLink></li>
+        <nav className="navigation-shell">
+            <div className="navigation-inner">
+                <NavLink to="/" className="navigation-brand" aria-label="Pokemark home">
+                    <span className="navigation-mark"><FiHexagon /></span>
+                    <span><strong>POKEMARK</strong><small>FIELD UNIT 04</small></span>
+                </NavLink>
+                <ul className="navigation-links">
+                    <li><NavLink to="/" className={linkClass}><FiCompass /><span>Expedition</span></NavLink></li>
+                    <li><NavLink to="/roster" className={linkClass}><FiBookOpen /><span>Specimens</span></NavLink></li>
+                    <li><NavLink to="/settings" className={linkClass}><FiSliders /><span>Field log</span></NavLink></li>
                 </ul>
+                <div className="navigation-status"><i /> System online</div>
             </div>
         </nav>
     );
