@@ -94,6 +94,118 @@ a:focus-visible {
     transform: translate(2px, 2px);
 }
 
+.navigation-shell {
+    align-items: center;
+    background: rgba(17, 22, 18, 0.97);
+    border-bottom: 1px solid rgba(201, 244, 91, 0.18);
+    color: var(--cream);
+    display: flex;
+    height: 72px;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 30;
+}
+
+.navigation-inner {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    max-width: 1180px;
+    width: calc(100% - 2rem);
+}
+
+.navigation-brand {
+    align-items: center;
+    display: inline-flex;
+    gap: 0.75rem;
+}
+
+.navigation-brand strong,
+.navigation-brand small {
+    display: block;
+}
+
+.navigation-brand strong {
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    line-height: 1;
+}
+
+.navigation-brand small {
+    color: #899089;
+    font-family: "DM Mono", monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.14em;
+    margin-top: 0.35rem;
+}
+
+.navigation-mark {
+    align-items: center;
+    background: var(--acid);
+    color: var(--ink);
+    display: flex;
+    height: 34px;
+    justify-content: center;
+    transform: rotate(45deg);
+    width: 34px;
+}
+
+.navigation-mark svg {
+    transform: rotate(-45deg);
+}
+
+.navigation-links {
+    align-items: stretch;
+    align-self: stretch;
+    display: flex;
+    gap: 0.2rem;
+    margin-left: 4rem;
+}
+
+.navigation-link {
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    color: #8d958e;
+    display: flex;
+    font-size: 0.72rem;
+    font-weight: 700;
+    gap: 0.5rem;
+    height: 100%;
+    letter-spacing: 0.05em;
+    padding: 0 1rem;
+    text-transform: uppercase;
+    transition: color 150ms ease, border-color 150ms ease;
+}
+
+.navigation-link:hover,
+.navigation-link-active {
+    border-color: var(--acid);
+    color: var(--cream);
+}
+
+.navigation-status {
+    align-items: center;
+    color: #899089;
+    display: flex;
+    font-family: "DM Mono", monospace;
+    font-size: 0.58rem;
+    gap: 0.5rem;
+    letter-spacing: 0.08em;
+    margin-left: auto;
+    text-transform: uppercase;
+}
+
+.navigation-status i {
+    background: var(--acid);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(201, 244, 91, 0.1);
+    height: 6px;
+    width: 6px;
+}
+
 .map-control {
     background: #fff;
     border: 2px solid #dbe2f0;
