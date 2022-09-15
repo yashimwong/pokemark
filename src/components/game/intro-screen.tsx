@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import { FiArrowUpRight, FiMapPin } from "react-icons/fi";
 
 const IntroScreen = ({ onStart }: { onStart: (name: string) => void }) => {
     const [name, setName] = useState("");
@@ -8,16 +9,30 @@ const IntroScreen = ({ onStart }: { onStart: (name: string) => void }) => {
     };
 
     return (
-        <div className="game-panel max-w-xl mx-auto text-center py-12 px-6">
-            <div className="text-6xl mb-6">⚡</div>
-            <p className="text-indigo-600 font-bold tracking-[0.25em] text-xs uppercase">Welcome to</p>
-            <h1 className="text-5xl sm:text-6xl font-black text-slate-900 mt-2">PokeMark</h1>
-            <p className="text-slate-600 mt-6 leading-relaxed">A new adventure is waiting across the tall grass, winding paths, and friendly battles of Meadow Town.</p>
-            <form onSubmit={submit} className="mt-8 flex flex-col gap-3">
-                <label className="text-left font-bold text-sm text-slate-700" htmlFor="trainer-name">What is your name, Trainer?</label>
-                <input id="trainer-name" value={name} onChange={(event) => setName(event.target.value)} maxLength={12} autoFocus placeholder="Enter your name" className="rounded-xl border-2 border-slate-200 px-4 py-3 outline-none focus:border-indigo-500" />
-                <button type="submit" className="game-button mt-2" disabled={!name.trim()}>Begin adventure</button>
-            </form>
+        <div className="intro-shell">
+            <div className="intro-visual">
+                <div className="intro-coordinate"><FiMapPin /> 36.2048° N · 138.2529° E</div>
+                <div className="intro-topography" aria-hidden="true"><span /><span /><span /><span /></div>
+                <div className="intro-copy">
+                    <p className="eyebrow">Field assignment · 04</p>
+                    <h1>Every trail leaves a mark.</h1>
+                    <p>Survey Meadow Town, document unknown species, and build a team capable of going beyond the mapped frontier.</p>
+                </div>
+                <div className="intro-readout"><span>REGION / MEADOW</span><span>CONDITIONS / CLEAR</span><span>STATUS / OPEN</span></div>
+            </div>
+            <div className="intro-panel">
+                <div>
+                    <p className="eyebrow">Trainer registration</p>
+                    <h2>Initialize your field journal</h2>
+                    <p className="intro-panel-copy">Your call sign will identify every survey, encounter, and specimen record.</p>
+                </div>
+                <form onSubmit={submit} className="intro-form">
+                    <label htmlFor="trainer-name">Trainer call sign</label>
+                    <div className="intro-input-wrap"><span>PM—</span><input id="trainer-name" value={name} onChange={(event) => setName(event.target.value)} maxLength={12} autoFocus placeholder="ENTER NAME" autoComplete="off" /></div>
+                    <button type="submit" className="game-button" disabled={!name.trim()}>Start expedition <FiArrowUpRight /></button>
+                </form>
+                <p className="intro-legal">FIELD SYSTEM 2.4 · LOCAL SAVE ACTIVE</p>
+            </div>
         </div>
     );
 };
