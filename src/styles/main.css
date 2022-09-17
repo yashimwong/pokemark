@@ -206,6 +206,205 @@ a:focus-visible {
     width: 6px;
 }
 
+.eyebrow {
+    color: #62705f;
+    font-family: "DM Mono", monospace;
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.intro-shell {
+    border: 1px solid rgba(17, 22, 18, 0.22);
+    border-radius: 1.15rem;
+    box-shadow: 0 34px 90px rgba(17, 22, 18, 0.18);
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.75fr);
+    margin: 1rem auto 0;
+    max-width: 1080px;
+    min-height: 610px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.intro-visual {
+    background:
+        linear-gradient(135deg, rgba(201, 244, 91, 0.08), transparent 45%),
+        var(--ink);
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    min-height: 610px;
+    overflow: hidden;
+    padding: 2rem;
+    position: relative;
+}
+
+.intro-visual::after {
+    background: linear-gradient(90deg, transparent 49.8%, rgba(201, 244, 91, 0.12) 50%, transparent 50.2%), linear-gradient(transparent 49.8%, rgba(201, 244, 91, 0.12) 50%, transparent 50.2%);
+    background-size: 56px 56px;
+    content: "";
+    inset: 0;
+    mask-image: linear-gradient(to bottom, black, transparent 75%);
+    opacity: 0.45;
+    pointer-events: none;
+    position: absolute;
+}
+
+.intro-coordinate {
+    align-items: center;
+    color: #a8b0a8;
+    display: flex;
+    font-family: "DM Mono", monospace;
+    font-size: 0.62rem;
+    gap: 0.5rem;
+    letter-spacing: 0.08em;
+    position: relative;
+    z-index: 2;
+}
+
+.intro-topography {
+    inset: 4rem 2rem 8rem;
+    position: absolute;
+}
+
+.intro-topography span {
+    border: 1px solid rgba(201, 244, 91, 0.28);
+    border-radius: 45% 55% 58% 42%;
+    inset: calc(var(--ring, 0) * 2rem);
+    position: absolute;
+    transform: rotate(calc(var(--ring, 0) * 11deg));
+}
+
+.intro-topography span:nth-child(1) { --ring: 0; }
+.intro-topography span:nth-child(2) { --ring: 1; }
+.intro-topography span:nth-child(3) { --ring: 2; }
+.intro-topography span:nth-child(4) { --ring: 3; }
+
+.intro-copy {
+    margin-top: auto;
+    max-width: 630px;
+    position: relative;
+    z-index: 2;
+}
+
+.intro-copy .eyebrow {
+    color: var(--acid);
+}
+
+.intro-copy h1 {
+    font-size: clamp(3rem, 7vw, 5.8rem);
+    font-weight: 600;
+    letter-spacing: -0.065em;
+    line-height: 0.92;
+    margin: 1rem 0 1.4rem;
+}
+
+.intro-copy > p:last-child {
+    color: #aab2aa;
+    font-size: 0.92rem;
+    line-height: 1.8;
+    max-width: 480px;
+}
+
+.intro-readout {
+    border-top: 1px solid rgba(242, 239, 230, 0.13);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.intro-readout span {
+    color: #7d867e;
+    font-family: "DM Mono", monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+}
+
+.intro-panel {
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem 2.4rem 2rem;
+}
+
+.intro-panel h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-top: 1rem;
+}
+
+.intro-panel-copy {
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.7;
+    margin-top: 1rem;
+}
+
+.intro-form {
+    display: grid;
+    gap: 0.8rem;
+    margin: 3rem 0;
+}
+
+.intro-form label {
+    color: #4f584f;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.intro-input-wrap {
+    align-items: center;
+    background: #e8e4d9;
+    border: 1px solid #bec3b8;
+    display: flex;
+    margin-bottom: 0.6rem;
+}
+
+.intro-input-wrap span {
+    border-right: 1px solid #bec3b8;
+    color: #7f887f;
+    font-family: "DM Mono", monospace;
+    font-size: 0.75rem;
+    padding: 1rem;
+}
+
+.intro-input-wrap input {
+    background: transparent;
+    border: 0;
+    color: var(--ink);
+    font-family: "DM Mono", monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    min-width: 0;
+    outline: none;
+    padding: 1rem;
+    width: 100%;
+}
+
+.intro-form .game-button {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.intro-legal {
+    color: #92998f;
+    font-family: "DM Mono", monospace;
+    font-size: 0.54rem;
+    letter-spacing: 0.08em;
+}
+
 .map-control {
     background: #fff;
     border: 2px solid #dbe2f0;
