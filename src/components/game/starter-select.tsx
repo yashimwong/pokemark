@@ -1,19 +1,29 @@
+import SpecimenPortrait from "components/game/specimen-portrait";
 import TypeBadge from "components/game/type-badge";
 import { species } from "game/data/species";
+import { FiArrowUpRight } from "react-icons/fi";
 
 const starterIds = ["sproutle", "cindercub", "bubblit"];
 
 const StarterSelect = ({ trainerName, onSelect }: { trainerName: string; onSelect: (speciesId: string) => void }) => (
-    <div className="game-panel max-w-4xl mx-auto px-6 py-10 text-center">
-        <p className="text-indigo-600 font-bold text-sm">Professor Oakwood</p>
-        <h1 className="text-3xl font-black text-slate-900 mt-2">Choose your first partner, {trainerName}!</h1>
-        <p className="text-slate-600 mt-3">Each one has a different strength. Your journey starts with the choice you make today.</p>
-        <div className="grid md:grid-cols-3 gap-5 mt-8">
+    <div className="starter-shell">
+        <header className="starter-header">
+            <div><p className="eyebrow">Oakwood research annex</p><h1>Select a field partner.</h1></div>
+            <div className="starter-brief"><span>ASSIGNEE / {trainerName.toUpperCase()}</span><span>CLEARANCE / PROVISIONAL</span></div>
+        </header>
+        <p className="starter-lede">Three specimens have completed behavioral screening. Review their field data before making a permanent assignment.</p>
+        <div className="starter-grid">
             {starterIds.map((id) => {
                 const starter = species[id];
-                return <button type="button" key={id} onClick={() => onSelect(id)} className="rounded-2xl border-2 border-slate-200 p-6 bg-white hover:border-indigo-500 hover:-translate-y-1 transition text-center"><div className="text-6xl mb-4">{starter.sprite}</div><h2 className="font-black text-xl">{starter.name}</h2><div className="flex justify-center gap-1 mt-2">{starter.types.map((type) => <TypeBadge key={type} type={type} />)}</div><p className="text-sm text-slate-500 mt-4">HP {starter.baseHp} · ATK {starter.attack} · DEF {starter.defense}</p><span className="inline-flex mt-5 font-bold text-indigo-600">Choose {starter.name}</span></button>;
+                return <button type="button" key={id} onClick={() => onSelect(id)} className="starter-card">
+                    <SpecimenPortrait specimen={starter} size="starter" />
+                    <div className="starter-card-heading"><div><span className="starter-number">SPECIMEN {starter.number}</span><h2>{starter.name}</h2></div><div className="flex gap-1">{starter.types.map((type) => <TypeBadge key={type} type={type} />)}</div></div>
+                    <dl className="starter-stats"><div><dt>Vitality</dt><dd>{starter.baseHp}</dd></div><div><dt>Force</dt><dd>{starter.attack}</dd></div><div><dt>Guard</dt><dd>{starter.defense}</dd></div></dl>
+                    <span className="starter-select">Assign partner <FiArrowUpRight /></span>
+                </button>;
             })}
         </div>
+        <footer className="starter-footer"><span>01 / SPECIMEN INTAKE</span><span>Selection cannot be amended in the field</span></footer>
     </div>
 );
 
