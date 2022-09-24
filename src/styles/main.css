@@ -405,6 +405,214 @@ a:focus-visible {
     letter-spacing: 0.08em;
 }
 
+.specimen-portrait {
+    --specimen-color: #87907f;
+    background:
+        linear-gradient(rgba(17, 22, 18, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17, 22, 18, 0.055) 1px, transparent 1px),
+        color-mix(in srgb, var(--specimen-color) 14%, var(--cream));
+    background-size: 18px 18px;
+    overflow: hidden;
+    position: relative;
+}
+
+.specimen-portrait::after {
+    border: 1px solid color-mix(in srgb, var(--specimen-color) 38%, transparent);
+    border-radius: 50%;
+    content: "";
+    height: 72%;
+    left: 50%;
+    position: absolute;
+    top: 54%;
+    transform: translate(-50%, -50%);
+    width: 72%;
+}
+
+.specimen-portrait img {
+    filter: drop-shadow(0 18px 16px rgba(17, 22, 18, 0.22));
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    transform: scale(1.08);
+    user-select: none;
+    width: 100%;
+    z-index: 2;
+}
+
+.specimen-index {
+    color: color-mix(in srgb, var(--specimen-color) 58%, var(--ink));
+    font-family: "DM Mono", monospace;
+    font-size: 0.5rem;
+    left: 0.65rem;
+    letter-spacing: 0.08em;
+    position: absolute;
+    top: 0.55rem;
+    z-index: 3;
+}
+
+.specimen-portrait-card {
+    border: 1px solid rgba(17, 22, 18, 0.1);
+    border-radius: 0.65rem;
+    flex: 0 0 auto;
+    height: 66px;
+    width: 66px;
+}
+
+.specimen-portrait-starter {
+    aspect-ratio: 1 / 0.86;
+    border-bottom: 1px solid rgba(17, 22, 18, 0.16);
+}
+
+.specimen-portrait-battle {
+    background-size: 28px 28px;
+    height: 220px;
+    width: 260px;
+}
+
+.specimen-portrait-opposing img {
+    transform: scale(1.08) scaleX(-1);
+}
+
+.starter-shell {
+    background: var(--cream);
+    border: 1px solid rgba(17, 22, 18, 0.2);
+    border-radius: 1.1rem;
+    box-shadow: 0 30px 80px rgba(17, 22, 18, 0.14);
+    margin: 1rem auto 0;
+    max-width: 1100px;
+    overflow: hidden;
+    padding: 2.5rem;
+    width: 100%;
+}
+
+.starter-header {
+    align-items: end;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    padding-bottom: 1.5rem;
+}
+
+.starter-header h1 {
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    font-weight: 600;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    margin-top: 0.75rem;
+}
+
+.starter-brief {
+    color: #737b72;
+    display: grid;
+    font-family: "DM Mono", monospace;
+    font-size: 0.56rem;
+    gap: 0.45rem;
+    letter-spacing: 0.07em;
+    min-width: 210px;
+}
+
+.starter-lede {
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.7;
+    margin: 1.4rem 0 2rem;
+    max-width: 620px;
+}
+
+.starter-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.starter-card {
+    background: #e9e5da;
+    border: 1px solid rgba(17, 22, 18, 0.16);
+    border-radius: 0.7rem;
+    overflow: hidden;
+    text-align: left;
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.starter-card:hover {
+    border-color: var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    transform: translate(-3px, -3px);
+}
+
+.starter-card-heading {
+    align-items: start;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.1rem 1.1rem 0.8rem;
+}
+
+.starter-card-heading h2 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+.starter-number {
+    color: #737c72;
+    display: block;
+    font-family: "DM Mono", monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.2rem;
+}
+
+.starter-stats {
+    border-bottom: 1px solid rgba(17, 22, 18, 0.13);
+    border-top: 1px solid rgba(17, 22, 18, 0.13);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 1.1rem;
+    padding: 0.75rem 0;
+}
+
+.starter-stats div + div {
+    border-left: 1px solid rgba(17, 22, 18, 0.13);
+    padding-left: 0.8rem;
+}
+
+.starter-stats dt {
+    color: #747c73;
+    font-family: "DM Mono", monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.starter-stats dd {
+    font-size: 0.88rem;
+    font-weight: 800;
+    margin-top: 0.2rem;
+}
+
+.starter-select {
+    align-items: center;
+    display: flex;
+    font-size: 0.68rem;
+    font-weight: 800;
+    justify-content: space-between;
+    letter-spacing: 0.08em;
+    padding: 1rem 1.1rem;
+    text-transform: uppercase;
+}
+
+.starter-footer {
+    color: #828a81;
+    display: flex;
+    font-family: "DM Mono", monospace;
+    font-size: 0.52rem;
+    justify-content: space-between;
+    letter-spacing: 0.07em;
+    margin-top: 1.6rem;
+    text-transform: uppercase;
+}
+
 .map-control {
     background: #fff;
     border: 2px solid #dbe2f0;
