@@ -613,6 +613,41 @@ a:focus-visible {
     text-transform: uppercase;
 }
 
+.type-badge {
+    --type-color: #858b83;
+    align-items: center;
+    border: 1px solid color-mix(in srgb, var(--type-color) 46%, transparent);
+    border-radius: 999px;
+    color: color-mix(in srgb, var(--type-color) 75%, var(--ink));
+    display: inline-flex;
+    font-family: "DM Mono", monospace;
+    font-size: 0.5rem;
+    gap: 0.35rem;
+    letter-spacing: 0.07em;
+    line-height: 1;
+    padding: 0.34rem 0.5rem;
+    text-transform: uppercase;
+}
+
+.type-badge i {
+    background: var(--type-color);
+    border-radius: 50%;
+    height: 5px;
+    width: 5px;
+}
+
+.type-normal { --type-color: #777d76; }
+.type-fire { --type-color: #d34f32; }
+.type-water { --type-color: #347ca2; }
+.type-grass { --type-color: #4c7e47; }
+.type-electric { --type-color: #a67e12; }
+.type-bug { --type-color: #6c7e38; }
+.type-poison { --type-color: #795684; }
+.type-ground { --type-color: #8b633d; }
+.type-flying { --type-color: #5c8291; }
+.type-psychic { --type-color: #a44f72; }
+.type-rock { --type-color: #6e665a; }
+
 .map-control {
     background: #fff;
     border: 2px solid #dbe2f0;
