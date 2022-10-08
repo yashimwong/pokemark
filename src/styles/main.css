@@ -648,6 +648,99 @@ a:focus-visible {
 .type-psychic { --type-color: #a44f72; }
 .type-rock { --type-color: #6e665a; }
 
+.pokemon-card {
+    background: rgba(255, 255, 255, 0.38);
+    border: 1px solid rgba(17, 22, 18, 0.14);
+    border-radius: 0.7rem;
+    display: block;
+    padding: 0.7rem;
+    text-align: left;
+    transition: background 150ms ease, border-color 150ms ease, transform 150ms ease;
+    width: 100%;
+}
+
+.pokemon-card:hover {
+    background: rgba(255, 255, 255, 0.72);
+    border-color: rgba(17, 22, 18, 0.4);
+    transform: translateY(-1px);
+}
+
+.pokemon-card-active {
+    background: color-mix(in srgb, var(--acid) 16%, var(--cream));
+    border-color: #7e9c36;
+}
+
+.pokemon-card-main {
+    align-items: center;
+    display: flex;
+    gap: 0.8rem;
+}
+
+.pokemon-card-data {
+    min-width: 0;
+}
+
+.pokemon-card-data strong {
+    display: block;
+    font-size: 0.92rem;
+    letter-spacing: -0.02em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pokemon-card-code {
+    color: #778077;
+    display: block;
+    font-family: "DM Mono", monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.07em;
+    margin-bottom: 0.25rem;
+}
+
+.health-meter {
+    margin-top: 0.85rem;
+    width: 100%;
+}
+
+.health-meter-label {
+    color: #616a61;
+    display: flex;
+    font-family: "DM Mono", monospace;
+    font-size: 0.58rem;
+    justify-content: space-between;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.38rem;
+    text-transform: uppercase;
+}
+
+.health-meter-track {
+    background: #ced1c8;
+    height: 5px;
+    overflow: hidden;
+}
+
+.health-meter-fill {
+    height: 100%;
+    transition: width 250ms ease;
+}
+
+.health-stable { background: #64893d; }
+.health-strained { background: #b48c2b; }
+.health-critical { background: var(--signal); }
+
+.health-meter-compact {
+    margin-top: 0.7rem;
+}
+
+.health-meter-compact .health-meter-label {
+    font-size: 0.5rem;
+}
+
+.health-meter-compact .health-meter-track {
+    height: 3px;
+}
+
 .map-control {
     background: #fff;
     border: 2px solid #dbe2f0;
