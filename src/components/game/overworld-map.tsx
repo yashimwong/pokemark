@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { townMap, trainers } from "game/data/world";
 import { GameState } from "game/types";
 
-const tileSymbols = { tree: "♣", water: "≈", flower: "✿", sign: "!", lab: "⌂", healing: "✚", bridge: "", path: "", grass: "" };
+const tileSymbols = { tree: "", water: "", flower: "", sign: "i", lab: "LAB", healing: "+", bridge: "", path: "", grass: "" };
 
 const OverworldMap = ({ game, onMove }: { game: GameState; onMove: (dx: number, dy: number) => void }) => {
     useEffect(() => {
@@ -25,7 +25,7 @@ const OverworldMap = ({ game, onMove }: { game: GameState; onMove: (dx: number, 
                 {townMap.flatMap((row, y) => row.map((tile, x) => {
                     const trainer = trainers.find((item) => item.x === x && item.y === y && !game.defeatedTrainers.includes(item.id));
                     const player = game.playerPosition.x === x && game.playerPosition.y === y;
-                    return <div key={`${x}-${y}`} className={classNames("map-tile", `tile-${tile}`)}>{tileSymbols[tile]}{trainer && <span className="map-trainer">●</span>}{player && <span className="map-player">●</span>}</div>;
+                    return <div key={`${x}-${y}`} className={classNames("map-tile", `tile-${tile}`)}>{tileSymbols[tile]}{trainer && <span className="map-trainer" title={`${trainer.title} ${trainer.name}`} />}{player && <span className="map-player" title={game.trainerName} />}</div>;
                 }))}
             </div>
         </div>

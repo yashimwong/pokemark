@@ -742,64 +742,116 @@ a:focus-visible {
 }
 
 .map-control {
-    background: #fff;
-    border: 2px solid #dbe2f0;
-    border-radius: 0.65rem;
-    color: #3730a3;
-    font-size: 1.25rem;
-    font-weight: 900;
-    height: 2.6rem;
+    align-items: center;
+    background: transparent;
+    border: 1px solid #767e75;
+    color: var(--ink);
+    display: flex;
+    font-family: "DM Mono", monospace;
+    font-size: 0.8rem;
+    height: 2.35rem;
+    justify-content: center;
 }
 
 .map-control:hover {
-    background: #eef2ff;
-    border-color: #818cf8;
+    background: var(--acid);
+    border-color: var(--ink);
 }
 
 .map-frame {
-    border: 5px solid #334155;
-    border-radius: 1rem;
+    background: #1b211c;
+    border: 10px solid #1b211c;
+    border-radius: 0.35rem;
     overflow: hidden;
-    box-shadow: inset 0 0 0 3px #f8fafc;
+    position: relative;
 }
 
 .world-map {
     display: grid;
     aspect-ratio: 4 / 3;
     min-height: 270px;
+    outline: 1px solid rgba(242, 239, 230, 0.1);
+    outline-offset: -1px;
 }
 
 .map-tile {
     align-items: center;
     display: flex;
-    font-size: clamp(0.65rem, 2vw, 1.25rem);
+    font-family: "DM Mono", monospace;
+    font-size: clamp(0.45rem, 1.2vw, 0.65rem);
     justify-content: center;
     overflow: hidden;
     position: relative;
 }
 
-.tile-path { background: #e8d4a9; }
-.tile-grass { background: #86c85b; color: #4d923f; }
-.tile-tree { background: #356f3d; color: #19532d; }
-.tile-water { background: #5aaee5; color: #a9dfff; }
-.tile-flower { background: #85c75b; color: #f9d5e8; }
-.tile-sign { background: #e8d4a9; color: #7a4e2f; font-weight: 900; }
-.tile-lab { background: #d5e7f2; color: #5f7281; }
-.tile-healing { background: #f5d2da; color: #d2475f; font-weight: 900; }
-.tile-bridge { background: #a8784a; }
+.map-tile::after {
+    border-bottom: 1px solid rgba(17, 22, 18, 0.055);
+    border-right: 1px solid rgba(17, 22, 18, 0.055);
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+}
+
+.tile-path { background: #c2bba8; }
+.tile-grass { background: #75845d; }
+.tile-tree { background: #334536; }
+.tile-water { background: #66838a; }
+.tile-flower { background: #7f8e68; }
+.tile-sign { background: #c2bba8; color: #4e554c; font-weight: 900; }
+.tile-lab { background: #6d746d; color: #e5e1d6; letter-spacing: 0.05em; }
+.tile-healing { background: #b86656; color: #fff4e8; font-size: 1rem; font-weight: 500; }
+.tile-bridge { background: repeating-linear-gradient(90deg, #81694f 0 8px, #755f48 8px 10px); }
+
+.tile-grass::before,
+.tile-flower::before {
+    background: repeating-linear-gradient(118deg, transparent 0 5px, rgba(31, 49, 30, 0.22) 5px 6px);
+    content: "";
+    inset: 0;
+    position: absolute;
+}
+
+.tile-tree::before {
+    background: #18291d;
+    border-radius: 48% 52% 44% 56%;
+    box-shadow: 7px 4px 0 #233a29, -6px 5px 0 #29422f;
+    content: "";
+    height: 45%;
+    position: absolute;
+    transform: rotate(12deg);
+    width: 38%;
+}
+
+.tile-water::before {
+    background: repeating-linear-gradient(0deg, transparent 0 8px, rgba(226, 238, 229, 0.2) 8px 9px);
+    content: "";
+    inset: 0;
+    position: absolute;
+}
 
 .map-player,
 .map-trainer {
-    border-radius: 9999px;
-    bottom: 12%;
-    height: 54%;
+    border-radius: 50%;
+    height: clamp(12px, 2vw, 20px);
+    left: 50%;
     position: absolute;
-    text-indent: -9999px;
-    width: 42%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(12px, 2vw, 20px);
+    z-index: 4;
 }
 
-.map-player { background: #4f46e5; border: 2px solid #fff; }
-.map-trainer { background: #ef4444; border: 2px solid #7f1d1d; }
+.map-player {
+    background: var(--acid);
+    border: 3px solid var(--ink);
+    box-shadow: 0 0 0 2px var(--acid);
+}
+
+.map-trainer {
+    background: var(--signal);
+    border: 3px solid #411d17;
+    box-shadow: 0 0 0 2px #e9a395;
+}
 
 .battle-scene {
     background: linear-gradient(155deg, #dff4ff 0%, #f8fbff 50%, #d8edcc 51%, #b5da98 100%);
