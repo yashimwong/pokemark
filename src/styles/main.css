@@ -853,6 +853,231 @@ a:focus-visible {
     box-shadow: 0 0 0 2px #e9a395;
 }
 
+.overworld-layout {
+    align-items: start;
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: minmax(0, 1fr) 290px;
+    width: 100%;
+}
+
+.overworld-primary,
+.overworld-sidebar {
+    background: rgba(242, 239, 230, 0.96);
+    border: 1px solid rgba(17, 22, 18, 0.16);
+    border-radius: 0.8rem;
+    box-shadow: 0 24px 65px rgba(17, 22, 18, 0.12);
+}
+
+.overworld-primary {
+    overflow: hidden;
+}
+
+.overworld-header {
+    align-items: end;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    padding: 1.6rem 1.7rem 1.4rem;
+}
+
+.overworld-header .eyebrow {
+    align-items: center;
+    display: flex;
+    gap: 0.4rem;
+}
+
+.overworld-header h1 {
+    font-size: clamp(2.1rem, 5vw, 3.6rem);
+    font-weight: 600;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    margin-top: 0.5rem;
+}
+
+.overworld-header > div:first-child > p:last-child {
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-top: 0.65rem;
+}
+
+.overworld-telemetry {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+.overworld-telemetry div {
+    border-left: 1px solid var(--line);
+    min-width: 94px;
+    padding-left: 1rem;
+}
+
+.overworld-telemetry span,
+.overworld-telemetry strong {
+    display: block;
+    font-family: "DM Mono", monospace;
+}
+
+.overworld-telemetry span {
+    color: #828a80;
+    font-size: 0.48rem;
+    letter-spacing: 0.08em;
+}
+
+.overworld-telemetry strong {
+    font-size: 0.7rem;
+    margin-top: 0.35rem;
+}
+
+.map-toolbar {
+    align-items: center;
+    background: var(--ink);
+    color: #9da69d;
+    display: flex;
+    font-family: "DM Mono", monospace;
+    font-size: 0.54rem;
+    justify-content: space-between;
+    letter-spacing: 0.08em;
+    padding: 0.8rem 1.1rem;
+    text-transform: uppercase;
+}
+
+.map-toolbar span:first-child {
+    align-items: center;
+    color: var(--acid);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.overworld-primary .map-frame {
+    border-radius: 0;
+}
+
+.map-footer {
+    align-items: center;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-between;
+    padding: 1.2rem 1.4rem;
+}
+
+.world-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+}
+
+.world-legend span {
+    align-items: center;
+    color: #6d766c;
+    display: flex;
+    font-family: "DM Mono", monospace;
+    font-size: 0.5rem;
+    gap: 0.38rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.world-legend i {
+    background: #75845d;
+    display: inline-block;
+    height: 7px;
+    width: 7px;
+}
+
+.world-legend .legend-water { background: #66838a; }
+.world-legend .legend-trainer { background: var(--signal); border-radius: 50%; }
+.world-legend .legend-player { background: var(--acid-strong); border-radius: 50%; }
+.world-legend .legend-healing { background: #b86656; }
+
+.movement-controls {
+    display: grid;
+    flex: 0 0 auto;
+    gap: 3px;
+    grid-template-columns: repeat(3, 2.35rem);
+    user-select: none;
+}
+
+.overworld-sidebar {
+    padding: 1.3rem;
+}
+
+.sidebar-heading {
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+}
+
+.sidebar-heading h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin-top: 0.3rem;
+}
+
+.sidebar-heading button {
+    align-items: center;
+    background: var(--ink);
+    color: var(--acid);
+    display: flex;
+    height: 34px;
+    justify-content: center;
+    width: 34px;
+}
+
+.party-list {
+    display: grid;
+    gap: 0.65rem;
+    margin-top: 1rem;
+}
+
+.field-note {
+    background: var(--ink);
+    color: #a4aca4;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.field-note span {
+    color: var(--acid);
+    font-family: "DM Mono", monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.08em;
+}
+
+.field-note p {
+    font-size: 0.7rem;
+    line-height: 1.65;
+    margin-top: 0.55rem;
+}
+
+.survey-progress {
+    margin-top: 1.1rem;
+}
+
+.survey-progress div {
+    display: flex;
+    font-family: "DM Mono", monospace;
+    font-size: 0.52rem;
+    justify-content: space-between;
+    letter-spacing: 0.06em;
+}
+
+.survey-progress > i {
+    background: #d2d4cd;
+    display: block;
+    height: 3px;
+    margin-top: 0.5rem;
+}
+
+.survey-progress b {
+    background: var(--ink);
+    display: block;
+    height: 100%;
+}
+
 .battle-scene {
     background: linear-gradient(155deg, #dff4ff 0%, #f8fbff 50%, #d8edcc 51%, #b5da98 100%);
 }
