@@ -1,15 +1,20 @@
 import MainContainer from "components/layout/container";
 import PokemonCard from "components/game/pokemon-card";
 import { useGame } from "game/context";
+import { FiArchive, FiLayers, FiPlus } from "react-icons/fi";
 
 const Roster = () => {
     const { game } = useGame();
     return (
         <MainContainer className="game-main">
-            <div className="w-full max-w-5xl mx-auto">
-                <div className="mb-7"><p className="text-sm uppercase tracking-wider font-bold text-indigo-600">Trainer roster</p><h1 className="text-3xl font-black">Your Pokémon</h1><p className="text-slate-500 mt-1">Keep up to six Pokémon in your active party.</p></div>
-                {!game.party.length ? <div className="game-panel p-8 text-center text-slate-500">Start your adventure and choose a partner to see your roster.</div> : <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">{game.party.map((pokemon, index) => <PokemonCard key={pokemon.uid} pokemon={pokemon} active={index === 0} />)}</div>}
-                {game.storage.length > 0 && <div className="mt-10"><h2 className="text-xl font-black mb-4">Storage</h2><div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">{game.storage.map((pokemon) => <PokemonCard key={pokemon.uid} pokemon={pokemon} />)}</div></div>}
+            <div className="roster-shell">
+                <header className="roster-header">
+                    <div><p className="eyebrow">Specimen registry</p><h1>Field roster</h1><p>Review the condition and classification of assigned specimens.</p></div>
+                    <div className="roster-summary"><div><FiLayers /><span>ACTIVE UNIT</span><strong>{game.party.length} / 6</strong></div><div><FiArchive /><span>ARCHIVE</span><strong>{game.storage.length}</strong></div></div>
+                </header>
+                <div className="roster-section-heading"><div><span>01</span><div><h2>Active field unit</h2><p>Primary specimen deploys first during contact.</p></div></div><span>{game.party.length} ENTRIES</span></div>
+                {!game.party.length ? <div className="roster-empty"><FiPlus /><strong>No specimens assigned</strong><p>Initialize an expedition and complete specimen intake.</p></div> : <div className="roster-grid">{game.party.map((pokemon, index) => <PokemonCard key={pokemon.uid} pokemon={pokemon} active={index === 0} />)}</div>}
+                {game.storage.length > 0 && <section className="roster-archive"><div className="roster-section-heading"><div><span>02</span><div><h2>Research archive</h2><p>Specimens outside the active rotation.</p></div></div><span>{game.storage.length} ENTRIES</span></div><div className="roster-grid">{game.storage.map((pokemon) => <PokemonCard key={pokemon.uid} pokemon={pokemon} />)}</div></section>}
             </div>
         </MainContainer>
     );
