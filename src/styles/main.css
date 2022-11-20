@@ -1345,3 +1345,318 @@ a:focus-visible {
     gap: 0.4rem;
     margin-top: 0.8rem;
 }
+
+.roster-shell,
+.log-shell {
+    background: rgba(242, 239, 230, 0.96);
+    border: 1px solid rgba(17, 22, 18, 0.16);
+    border-radius: 0.85rem;
+    box-shadow: 0 30px 80px rgba(17, 22, 18, 0.13);
+    margin: 0 auto;
+    max-width: 1050px;
+    padding: 2rem;
+    width: 100%;
+}
+
+.roster-header,
+.log-header {
+    align-items: end;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    padding-bottom: 1.6rem;
+}
+
+.roster-header h1,
+.log-header h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 600;
+    letter-spacing: -0.065em;
+    line-height: 1;
+    margin-top: 0.65rem;
+}
+
+.roster-header > div:first-child > p:last-child,
+.log-header > div:first-child > p:last-child {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 0.8rem;
+}
+
+.roster-summary {
+    display: flex;
+}
+
+.roster-summary > div {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    min-width: 120px;
+    padding-left: 1rem;
+}
+
+.roster-summary > div + div {
+    border-left: 1px solid var(--line);
+}
+
+.roster-summary svg {
+    grid-row: 1 / 3;
+    margin-right: 0.65rem;
+}
+
+.roster-summary span,
+.roster-summary strong {
+    font-family: "DM Mono", monospace;
+}
+
+.roster-summary span {
+    color: #7e867d;
+    font-size: 0.46rem;
+    letter-spacing: 0.08em;
+}
+
+.roster-summary strong {
+    font-size: 0.76rem;
+    margin-top: 0.25rem;
+}
+
+.roster-section-heading {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0 1rem;
+}
+
+.roster-section-heading > div {
+    align-items: center;
+    display: flex;
+    gap: 0.8rem;
+}
+
+.roster-section-heading > div > span {
+    align-items: center;
+    background: var(--ink);
+    color: var(--acid);
+    display: flex;
+    font-family: "DM Mono", monospace;
+    font-size: 0.6rem;
+    height: 32px;
+    justify-content: center;
+    width: 32px;
+}
+
+.roster-section-heading h2 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.roster-section-heading p,
+.roster-section-heading > span {
+    color: #7a8379;
+    font-family: "DM Mono", monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.05em;
+    margin-top: 0.2rem;
+}
+
+.roster-grid {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.roster-grid .pokemon-card {
+    background: #e8e4d9;
+    padding: 0.9rem;
+}
+
+.roster-empty {
+    align-items: center;
+    border: 1px dashed #aeb3aa;
+    color: #697268;
+    display: flex;
+    flex-direction: column;
+    min-height: 230px;
+    justify-content: center;
+    text-align: center;
+}
+
+.roster-empty svg {
+    color: #90988f;
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.roster-empty strong {
+    color: var(--ink);
+    font-size: 0.85rem;
+}
+
+.roster-empty p {
+    font-size: 0.7rem;
+    margin-top: 0.35rem;
+}
+
+.roster-archive {
+    border-top: 1px solid var(--line);
+    margin-top: 2.5rem;
+}
+
+.log-header > span {
+    color: #737c72;
+    font-family: "DM Mono", monospace;
+    font-size: 0.54rem;
+    letter-spacing: 0.08em;
+}
+
+.log-grid {
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1.4rem;
+}
+
+.log-panel {
+    background: #e7e3d8;
+    border: 1px solid rgba(17, 22, 18, 0.13);
+    padding: 1.3rem;
+}
+
+.log-panel-dark {
+    background: var(--ink);
+    color: var(--cream);
+}
+
+.log-panel-wide {
+    grid-column: 1 / -1;
+}
+
+.log-panel-heading {
+    align-items: center;
+    border-bottom: 1px solid rgba(17, 22, 18, 0.14);
+    display: flex;
+    gap: 0.8rem;
+    padding-bottom: 1rem;
+}
+
+.log-panel-dark .log-panel-heading {
+    border-color: rgba(242, 239, 230, 0.15);
+}
+
+.log-panel-heading > svg {
+    color: #65705f;
+    font-size: 1.2rem;
+}
+
+.log-panel-dark .log-panel-heading > svg {
+    color: var(--acid);
+}
+
+.log-panel-heading span {
+    color: #818980;
+    display: block;
+    font-family: "DM Mono", monospace;
+    font-size: 0.46rem;
+    letter-spacing: 0.08em;
+}
+
+.log-panel-heading h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 0.15rem;
+}
+
+.protocol-list {
+    counter-reset: protocol;
+    margin-top: 0.4rem;
+}
+
+.protocol-list li {
+    align-items: start;
+    border-bottom: 1px solid rgba(17, 22, 18, 0.1);
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: auto 1fr;
+    padding: 0.8rem 0;
+}
+
+.protocol-list li > span {
+    color: #818a80;
+    font-family: "DM Mono", monospace;
+    font-size: 0.5rem;
+}
+
+.protocol-list p {
+    color: #555e55;
+    font-size: 0.7rem;
+    line-height: 1.5;
+}
+
+.agent-record {
+    margin-top: 0.45rem;
+}
+
+.agent-record div {
+    align-items: center;
+    border-bottom: 1px solid rgba(242, 239, 230, 0.12);
+    display: flex;
+    justify-content: space-between;
+    padding: 0.85rem 0;
+}
+
+.agent-record dt {
+    color: #8e978e;
+    font-family: "DM Mono", monospace;
+    font-size: 0.54rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.agent-record dd {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.badge-registry {
+    margin-top: 1rem;
+}
+
+.badge-entry,
+.badge-empty {
+    align-items: center;
+    border: 1px solid #bdc2b7;
+    display: flex;
+    gap: 0.9rem;
+    padding: 1rem;
+}
+
+.badge-entry > svg {
+    color: #8b6a1f;
+    font-size: 1.5rem;
+}
+
+.badge-empty > svg {
+    color: #858d84;
+    font-size: 1.3rem;
+}
+
+.badge-entry strong,
+.badge-entry small,
+.badge-empty strong,
+.badge-empty small {
+    display: block;
+}
+
+.badge-entry strong,
+.badge-empty strong {
+    font-size: 0.78rem;
+}
+
+.badge-entry small,
+.badge-empty small {
+    color: #7b837a;
+    font-family: "DM Mono", monospace;
+    font-size: 0.48rem;
+    letter-spacing: 0.06em;
+    margin-top: 0.25rem;
+}
