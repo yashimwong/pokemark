@@ -1660,3 +1660,55 @@ a:focus-visible {
     letter-spacing: 0.06em;
     margin-top: 0.25rem;
 }
+
+.field-notice {
+    align-items: center;
+    background: var(--ink);
+    border: 1px solid rgba(201, 244, 91, 0.35);
+    bottom: 1.5rem;
+    box-shadow: 0 18px 55px rgba(17, 22, 18, 0.34);
+    color: var(--cream);
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    left: 50%;
+    max-width: 440px;
+    padding: 0.9rem 1rem;
+    position: fixed;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    z-index: 40;
+}
+
+.field-notice-signal {
+    background: var(--acid);
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px rgba(201, 244, 91, 0.1);
+    height: 7px;
+    width: 7px;
+}
+
+.field-notice small {
+    color: var(--acid);
+    display: block;
+    font-family: "DM Mono", monospace;
+    font-size: 0.46rem;
+    letter-spacing: 0.1em;
+}
+
+.field-notice p {
+    color: #d3d7d1;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-top: 0.22rem;
+}
+
+.field-notice button {
+    align-items: center;
+    border: 1px solid #495149;
+    color: #aeb5ae;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    width: 30px;
+}
