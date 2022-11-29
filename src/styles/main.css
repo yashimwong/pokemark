@@ -486,7 +486,7 @@ a:focus-visible {
 }
 
 .starter-header {
-    align-items: end;
+    align-items: flex-end;
     border-bottom: 1px solid var(--line);
     display: flex;
     gap: 2rem;
@@ -542,7 +542,7 @@ a:focus-visible {
 }
 
 .starter-card-heading {
-    align-items: start;
+    align-items: flex-start;
     display: flex;
     justify-content: space-between;
     padding: 1.1rem 1.1rem 0.8rem;
@@ -854,7 +854,7 @@ a:focus-visible {
 }
 
 .overworld-layout {
-    align-items: start;
+    align-items: flex-start;
     display: grid;
     gap: 1.2rem;
     grid-template-columns: minmax(0, 1fr) 290px;
@@ -874,7 +874,7 @@ a:focus-visible {
 }
 
 .overworld-header {
-    align-items: end;
+    align-items: flex-end;
     display: flex;
     gap: 2rem;
     justify-content: space-between;
@@ -1150,16 +1150,16 @@ a:focus-visible {
 }
 
 .battle-pokemon {
-    align-items: start;
+    align-items: flex-start;
     display: flex;
     flex-direction: column-reverse;
-    justify-content: end;
+    justify-content: flex-end;
     position: relative;
     z-index: 2;
 }
 
 .battle-pokemon-opposing {
-    align-items: end;
+    align-items: flex-end;
     flex-direction: column;
     grid-column: 2;
     text-align: right;
@@ -1360,7 +1360,7 @@ a:focus-visible {
 
 .roster-header,
 .log-header {
-    align-items: end;
+    align-items: flex-end;
     border-bottom: 1px solid var(--line);
     display: flex;
     gap: 2rem;
@@ -1572,7 +1572,7 @@ a:focus-visible {
 }
 
 .protocol-list li {
-    align-items: start;
+    align-items: flex-start;
     border-bottom: 1px solid rgba(17, 22, 18, 0.1);
     display: grid;
     gap: 0.8rem;
@@ -1711,4 +1711,213 @@ a:focus-visible {
     height: 30px;
     justify-content: center;
     width: 30px;
+}
+
+@media (max-width: 900px) {
+    .navigation-status {
+        display: none;
+    }
+
+    .navigation-links {
+        margin-left: auto;
+    }
+
+    .intro-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .intro-visual {
+        min-height: 470px;
+    }
+
+    .starter-grid,
+    .roster-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .starter-card:last-child {
+        grid-column: 1 / -1;
+        max-width: calc(50% - 0.5rem);
+    }
+
+    .overworld-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .overworld-sidebar {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: minmax(230px, 0.7fr) minmax(0, 1.3fr);
+    }
+
+    .sidebar-heading {
+        grid-column: 1 / -1;
+    }
+
+    .party-list,
+    .field-note,
+    .survey-progress {
+        margin-top: 0;
+    }
+
+    .survey-progress {
+        align-self: end;
+    }
+}
+
+@media (max-width: 680px) {
+    .game-main {
+        padding-top: 1.2rem;
+    }
+
+    .navigation-brand small,
+    .navigation-link span {
+        display: none;
+    }
+
+    .navigation-links {
+        gap: 0;
+    }
+
+    .navigation-link {
+        font-size: 1rem;
+        padding: 0 0.75rem;
+    }
+
+    .intro-visual {
+        min-height: 420px;
+        padding: 1.5rem;
+    }
+
+    .intro-panel,
+    .starter-shell,
+    .roster-shell,
+    .log-shell {
+        padding: 1.4rem;
+    }
+
+    .intro-copy h1 {
+        font-size: 3.4rem;
+    }
+
+    .starter-header,
+    .overworld-header,
+    .roster-header,
+    .log-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .starter-brief,
+    .log-header > span {
+        display: none;
+    }
+
+    .starter-grid,
+    .roster-grid,
+    .log-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .starter-card:last-child {
+        grid-column: auto;
+        max-width: none;
+    }
+
+    .overworld-telemetry {
+        width: 100%;
+    }
+
+    .overworld-telemetry div {
+        min-width: 0;
+        width: 33.333%;
+    }
+
+    .world-map {
+        min-height: 230px;
+    }
+
+    .map-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .movement-controls {
+        align-self: center;
+    }
+
+    .overworld-sidebar {
+        display: block;
+    }
+
+    .party-list,
+    .field-note,
+    .survey-progress {
+        margin-top: 1rem;
+    }
+
+    .battle-header {
+        grid-template-columns: 1fr auto;
+    }
+
+    .battle-header > span:last-child {
+        display: none;
+    }
+
+    .battle-scene {
+        min-height: 520px;
+        padding: 1rem;
+    }
+
+    .battle-pokemon {
+        justify-content: space-between;
+    }
+
+    .battle-pokemon .specimen-portrait-battle {
+        height: 165px;
+        width: 170px;
+    }
+
+    .battle-status {
+        min-width: 175px;
+        width: 100%;
+    }
+
+    .battle-console {
+        grid-template-columns: 1fr;
+    }
+
+    .move-grid,
+    .battle-switcher-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .battle-options {
+        flex-wrap: wrap;
+    }
+
+    .battle-option {
+        flex-basis: calc(50% - 0.25rem);
+    }
+
+    .roster-summary {
+        width: 100%;
+    }
+
+    .roster-summary > div {
+        flex: 1;
+    }
+
+    .log-panel-wide {
+        grid-column: auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
 }
