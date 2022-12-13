@@ -647,6 +647,7 @@ a:focus-visible {
 .type-flying { --type-color: #5c8291; }
 .type-psychic { --type-color: #a44f72; }
 .type-rock { --type-color: #6e665a; }
+.type-dark { --type-color: #49413e; }
 
 .pokemon-card {
     background: rgba(255, 255, 255, 0.38);

@@ -1,11 +1,11 @@
 import HealthBar from "components/game/health-bar";
 import SpecimenPortrait from "components/game/specimen-portrait";
 import TypeBadge from "components/game/type-badge";
-import { species } from "game/data/species";
+import { getSpecies } from "game/data/species";
 import { Pokemon } from "game/types";
 
 const PokemonCard = ({ pokemon, active, onClick }: { pokemon: Pokemon; active?: boolean; onClick?: () => void }) => {
-    const currentSpecies = species[pokemon.speciesId];
+    const currentSpecies = getSpecies(pokemon.speciesId);
     return (
         <button type="button" onClick={onClick} className={`pokemon-card ${active ? "pokemon-card-active" : ""}`}>
             <div className="pokemon-card-main">

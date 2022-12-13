@@ -1,9 +1,9 @@
 import SpecimenPortrait from "components/game/specimen-portrait";
 import TypeBadge from "components/game/type-badge";
-import { species } from "game/data/species";
+import { getSpecies } from "game/data/species";
 import { FiArrowUpRight } from "react-icons/fi";
 
-const starterIds = ["sproutle", "cindercub", "bubblit"];
+const starterIds = ["bulbasaur", "charmander", "squirtle"];
 
 const StarterSelect = ({ trainerName, onSelect }: { trainerName: string; onSelect: (speciesId: string) => void }) => (
     <div className="starter-shell">
@@ -14,7 +14,7 @@ const StarterSelect = ({ trainerName, onSelect }: { trainerName: string; onSelec
         <p className="starter-lede">Three specimens have completed behavioral screening. Review their field data before making a permanent assignment.</p>
         <div className="starter-grid">
             {starterIds.map((id) => {
-                const starter = species[id];
+                const starter = getSpecies(id);
                 return <button type="button" key={id} onClick={() => onSelect(id)} className="starter-card">
                     <SpecimenPortrait specimen={starter} size="starter" />
                     <div className="starter-card-heading"><div><span className="starter-number">SPECIMEN {starter.number}</span><h2>{starter.name}</h2></div><div className="flex gap-1">{starter.types.map((type) => <TypeBadge key={type} type={type} />)}</div></div>

@@ -1,4 +1,4 @@
-export type PokemonType = "normal" | "fire" | "water" | "grass" | "electric" | "bug" | "poison" | "ground" | "flying" | "psychic" | "rock";
+export type PokemonType = "normal" | "fire" | "water" | "grass" | "electric" | "bug" | "poison" | "ground" | "flying" | "psychic" | "rock" | "dark";
 
 export type MoveCategory = "physical" | "special" | "status";
 
@@ -23,6 +23,8 @@ export type PokemonSpecies = {
     baseHp: number;
     attack: number;
     defense: number;
+    specialAttack: number;
+    specialDefense: number;
     speed: number;
     moves: string[];
     evolvesTo?: string;

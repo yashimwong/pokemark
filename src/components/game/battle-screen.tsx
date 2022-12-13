@@ -11,6 +11,7 @@ const BattleScreen = ({ game, onFight, onSwitch, onCatch, onRun }: { game: GameS
     if (!battle) return null;
     const player = game.party[battle.activePlayerIndex];
     const opponent = battle.opponent.pokemon[battle.activeOpponentIndex];
+    if (!player || !opponent) return null;
     const opponentName = battle.opponent.kind === "wild" ? "Wild Pokémon" : `${battle.opponent.trainer?.title} ${battle.opponent.trainer?.name}`;
 
     return (

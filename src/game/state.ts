@@ -1,5 +1,5 @@
-import { createPokemon, species } from "game/data/species";
-import { moves } from "game/data/moves";
+import { createPokemon, getSpecies } from "game/data/species";
+import { getMove } from "game/data/moves";
 import { townMap, trainers, wildEncounterIds, isWalkable } from "game/data/world";
 import { calculateDamage, healthyPokemonIndex, isFainted, typeMultiplier } from "game/battle";
 import { grassEncounterChance, maxPartySize, experienceForLevel } from "game/constants";
@@ -22,7 +22,7 @@ export const chooseStarter = (state: GameState, speciesId: string): GameState =>
     ...state,
     party: [createPokemon(speciesId, 5)],
     screen: "overworld",
-    notice: `Professor Oakwood gave you ${species[speciesId].name}!`
+    notice: `Professor Oakwood gave you ${getSpecies(speciesId).name}!`
 });
 
 const makeWildOpponent = (): BattleParticipant => {
@@ -34,7 +34,7 @@ const beginBattle = (state: GameState, opponent: BattleParticipant): GameState =
     ...state,
     screen: "battle",
     notice: undefined,
-    battle: { opponent, activePlayerIndex: healthyPokemonIndex(state.party), activeOpponentIndex: 0, message: opponent.kind === "wild" ? `A wild ${species[opponent.pokemon[0].speciesId].name} appeared!` : `${opponent.trainer?.title} ${opponent.trainer?.name} wants to battle!`, turn: "player", canRun: opponent.kind === "wild" }
+    battle: { opponent, activePlayerIndex: healthyPokemonIndex(state.party), activeOpponentIndex: 0, message: opponent.kind === "wild" ? `A wild ${getSpecies(opponent.pokemon[0].speciesId).name} appeared!` : `${opponent.trainer?.title} ${opponent.trainer?.name} wants to battle!`, turn: "player", canRun: opponent.kind === "wild" }
 });
 
 export const movePlayer = (state: GameState, dx: number, dy: number): GameState => {
@@ -62,10 +62,10 @@ const levelUp = (pokemon: Pokemon, earnedExperience: number): Pokemon => {
     let nextPokemon = { ...pokemon, experience: pokemon.experience + earnedExperience };
     while (nextPokemon.experience >= experienceForLevel(nextPokemon.level)) {
         nextPokemon = { ...nextPokemon, level: nextPokemon.level + 1, maxHp: nextPokemon.maxHp + 3, hp: Math.min(nextPokemon.maxHp + 3, nextPokemon.hp + 5) };
-        const currentSpecies = species[nextPokemon.speciesId];
+        const currentSpecies = getSpecies(nextPokemon.speciesId);
         if (currentSpecies.evolvesTo && currentSpecies.evolutionLevel === nextPokemon.level) {
-            const evolved = species[currentSpecies.evolvesTo];
-            nextPokemon = { ...nextPokemon, speciesId: evolved.id, nickname: nextPokemon.nickname === currentSpecies.name ? evolved.name : nextPokemon.nickname, maxHp: nextPokemon.maxHp + 8, hp: nextPokemon.hp + 8, moves: evolved.moves.map((moveId) => moves[moveId]) };
+            const evolved = getSpecies(currentSpecies.evolvesTo);
+            nextPokemon = { ...nextPokemon, speciesId: evolved.id, nickname: nextPokemon.nickname === currentSpecies.name ? evolved.name : nextPokemon.nickname, maxHp: nextPokemon.maxHp + 8, hp: nextPokemon.hp + 8, moves: evolved.moves.map(getMove) };
         }
     }
     return nextPokemon;
@@ -73,7 +73,7 @@ const levelUp = (pokemon: Pokemon, earnedExperience: number): Pokemon => {
 
 const advanceOpponent = (state: GameState, party: Pokemon[], battle: BattleState, defeatedName: string): GameState => {
     const nextIndex = healthyPokemonIndex(battle.opponent.pokemon);
-    if (nextIndex >= 0) return { ...state, party, battle: { ...battle, activeOpponentIndex: nextIndex, message: `${defeatedName} fainted! ${species[battle.opponent.pokemon[nextIndex].speciesId].name} is next.`, turn: "player" } };
+    if (nextIndex >= 0) return { ...state, party, battle: { ...battle, activeOpponentIndex: nextIndex, message: `${defeatedName} fainted! ${getSpecies(battle.opponent.pokemon[nextIndex].speciesId).name} is next.`, turn: "player" } };
     const reward = battle.opponent.kind === "trainer" ? battle.opponent.trainer?.reward || 0 : 0;
     const trainerId = battle.opponent.trainer?.id;
     const badge = trainerId === "luna" ? "Meadow Badge" : undefined;
@@ -85,6 +85,7 @@ export const useMove = (state: GameState, move: Move): GameState => {
     if (!battle || battle.turn !== "player") return state;
     const player = state.party[battle.activePlayerIndex];
     const opponent = battle.opponent.pokemon[battle.activeOpponentIndex];
+    if (!player || !opponent) return { ...state, screen: "overworld", battle: undefined, notice: "The encounter data was incomplete. Returning to the field." };
     const damage = calculateDamage(player, opponent, move);
     const updatedOpponent = { ...opponent, hp: Math.max(0, opponent.hp - damage) };
     const updatedBattle = replaceBattlePokemon(battle, "opponent", battle.activeOpponentIndex, updatedOpponent);
@@ -94,7 +95,7 @@ export const useMove = (state: GameState, move: Move): GameState => {
         const party = state.party.map((item, index) => index === battle.activePlayerIndex ? levelUp(item, earnedExperience) : item);
         return advanceOpponent(state, party, updatedBattle, opponent.nickname);
     }
-    const opponentMove = updatedOpponent.moves[Math.floor(Math.random() * updatedOpponent.moves.length)];
+    const opponentMove = updatedOpponent.moves[Math.floor(Math.random() * updatedOpponent.moves.length)] || getMove("tackle");
     const counterDamage = calculateDamage(updatedOpponent, player, opponentMove);
     const updatedPlayer = { ...player, hp: Math.max(0, player.hp - counterDamage) };
     const party = state.party.map((item, index) => index === battle.activePlayerIndex ? updatedPlayer : item);
@@ -108,7 +109,8 @@ export const useMove = (state: GameState, move: Move): GameState => {
 };
 
 export const switchPokemon = (state: GameState, index: number): GameState => {
-    if (!state.battle || index === state.battle.activePlayerIndex || isFainted(state.party[index])) return state;
+    const pokemon = state.party[index];
+    if (!state.battle || !pokemon || index === state.battle.activePlayerIndex || isFainted(pokemon)) return state;
     return { ...state, battle: { ...state.battle, activePlayerIndex: index, message: `Go, ${state.party[index].nickname}!`, turn: "player" } };
 };
 
@@ -118,6 +120,7 @@ export const catchPokemon = (state: GameState): GameState => {
     const battle = state.battle;
     if (!battle || battle.opponent.kind === "trainer") return state;
     const pokemon = battle.opponent.pokemon[battle.activeOpponentIndex];
+    if (!pokemon) return { ...state, screen: "overworld", battle: undefined, notice: "The encounter data was incomplete. Returning to the field." };
     const chance = 0.3 + (1 - pokemon.hp / pokemon.maxHp) * 0.6;
     if (Math.random() > chance) return { ...state, battle: { ...battle, message: `Oh no! ${pokemon.nickname} broke free!`, turn: "player" } };
     const party = state.party.length < maxPartySize ? [...state.party, pokemon] : state.party;

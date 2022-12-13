@@ -1,11 +1,11 @@
 import HealthBar from "components/game/health-bar";
 import SpecimenPortrait from "components/game/specimen-portrait";
 import TypeBadge from "components/game/type-badge";
-import { species } from "game/data/species";
+import { getSpecies } from "game/data/species";
 import { Pokemon } from "game/types";
 
 const BattlePokemon = ({ pokemon, opposing }: { pokemon: Pokemon; opposing?: boolean }) => {
-    const currentSpecies = species[pokemon.speciesId];
+    const currentSpecies = getSpecies(pokemon.speciesId);
     return (
         <div className={`battle-pokemon ${opposing ? "battle-pokemon-opposing" : ""}`}>
             <SpecimenPortrait specimen={currentSpecies} size="battle" opposing={opposing} />
