@@ -1,10 +1,10 @@
 const WorldLegend = () => (
     <div className="world-legend">
-        <span><i className="legend-grass" /> Habitat</span>
-        <span><i className="legend-water" /> Water</span>
-        <span><i className="legend-trainer" /> Contact</span>
-        <span><i className="legend-player" /> Agent</span>
-        <span><i className="legend-healing" /> Medical</span>
+        <span><img src="/tiles/grass.svg" alt="" /> Tall grass</span>
+        <span><img src="/tiles/water.svg" alt="" /> Water</span>
+        <span><img src="/sprites/trainer.svg" alt="" /> Trainer</span>
+        <span><img src="/sprites/player.svg" alt="" /> You</span>
+        <span><img src="/tiles/healing.svg" alt="" /> Poké Center</span>
     </div>
 );
 

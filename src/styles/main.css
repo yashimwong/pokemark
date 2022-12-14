@@ -785,6 +785,15 @@ a:focus-visible {
     position: relative;
 }
 
+.map-tile-art {
+    height: 100%;
+    image-rendering: pixelated;
+    inset: 0;
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+}
+
 .map-tile::after {
     border-bottom: 1px solid rgba(17, 22, 18, 0.055);
     border-right: 1px solid rgba(17, 22, 18, 0.055);
@@ -830,28 +839,25 @@ a:focus-visible {
     position: absolute;
 }
 
-.map-player,
-.map-trainer {
-    border-radius: 50%;
-    height: clamp(12px, 2vw, 20px);
+.map-character {
+    filter: drop-shadow(2px 3px 0 rgba(18, 27, 20, 0.45));
+    height: clamp(20px, 3.2vw, 34px);
+    image-rendering: pixelated;
     left: 50%;
+    object-fit: contain;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: clamp(12px, 2vw, 20px);
+    width: clamp(15px, 2.4vw, 26px);
     z-index: 4;
 }
 
 .map-player {
-    background: var(--acid);
-    border: 3px solid var(--ink);
-    box-shadow: 0 0 0 2px var(--acid);
+    animation: player-bob 800ms steps(2, end) infinite;
 }
 
-.map-trainer {
-    background: var(--signal);
-    border: 3px solid #411d17;
-    box-shadow: 0 0 0 2px #e9a395;
+@keyframes player-bob {
+    50% { transform: translate(-50%, calc(-50% - 2px)); }
 }
 
 .overworld-layout {
@@ -979,17 +985,13 @@ a:focus-visible {
     text-transform: uppercase;
 }
 
-.world-legend i {
-    background: #75845d;
+.world-legend img {
     display: inline-block;
-    height: 7px;
-    width: 7px;
+    height: 18px;
+    image-rendering: pixelated;
+    object-fit: cover;
+    width: 18px;
 }
-
-.world-legend .legend-water { background: #66838a; }
-.world-legend .legend-trainer { background: var(--signal); border-radius: 50%; }
-.world-legend .legend-player { background: var(--acid-strong); border-radius: 50%; }
-.world-legend .legend-healing { background: #b86656; }
 
 .movement-controls {
     display: grid;
