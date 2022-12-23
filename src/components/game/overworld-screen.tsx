@@ -17,7 +17,7 @@ const OverworldScreen = ({ game, onMove, onOpenRoster }: { game: GameState; onMo
             <div className="map-footer"><WorldLegend /><MovementControls onMove={onMove} /></div>
         </section>
         <aside className="overworld-sidebar">
-            <div className="sidebar-heading"><div><p className="eyebrow">Active unit</p><h2>Field party</h2></div><button type="button" onClick={onOpenRoster} aria-label="Open full specimen roster"><FiArrowUpRight /></button></div>
+            <div className="sidebar-heading"><div><p className="eyebrow">Pokémon team</p><h2>Your party</h2></div><button type="button" onClick={onOpenRoster} aria-label="Open Pokédex"><FiArrowUpRight /></button></div>
             <div className="party-list">{game.party.map((pokemon, index) => <PokemonCard key={pokemon.uid} pokemon={pokemon} active={index === 0} />)}</div>
             <div className="field-note"><span>FIELD NOTE / 08</span><p>Dense habitat begins beyond the marked trail. Encounters remain unpredictable.</p></div>
             <div className="survey-progress"><div><span>REGION SURVEY</span><strong>{Math.min(92, 24 + game.defeatedTrainers.length * 18 + game.badges.length * 14)}%</strong></div><i><b style={{ width: `${Math.min(92, 24 + game.defeatedTrainers.length * 18 + game.badges.length * 14)}%` }} /></i></div>

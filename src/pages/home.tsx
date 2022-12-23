@@ -16,7 +16,7 @@ const Home = () => {
             <div className="w-full">
                 {game.screen === "intro" && <IntroScreen onStart={beginAdventure} />}
                 {game.screen === "starter" && <StarterSelect trainerName={game.trainerName} onSelect={selectStarter} />}
-                {game.screen === "overworld" && <OverworldScreen game={game} onMove={move} onOpenRoster={() => navigate("/roster")} />}
+                {game.screen === "overworld" && <OverworldScreen game={game} onMove={move} onOpenRoster={() => navigate("/pokedex")} />}
                 {game.screen === "battle" && <BattleScreen game={game} onFight={fight} onSwitch={switchPartyMember} onCatch={catchWildPokemon} onRun={run} />}
                 <Notice message={game.notice} onClose={clearNotice} />
             </div>
