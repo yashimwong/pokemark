@@ -2227,6 +2227,126 @@ a:focus-visible {
     }
 }
 
+/* Battle impact feedback */
+.battle-pokemon-attacking .specimen-portrait {
+    animation: pokemon-lunge 620ms steps(4, end);
+}
+
+.battle-pokemon-hit .specimen-portrait {
+    animation: pokemon-hit 620ms steps(4, end);
+}
+
+.attack-effect {
+    --impact: #f7d35b;
+    height: 130px;
+    pointer-events: none;
+    position: absolute;
+    right: 5.5rem;
+    top: 7.5rem;
+    width: 130px;
+    z-index: 8;
+}
+
+.attack-effect i {
+    animation: pixel-burst 560ms steps(4, end) forwards;
+    background: var(--impact);
+    border: 3px solid #fff4cf;
+    box-shadow: 3px 3px 0 #29202c;
+    height: 14px;
+    left: 58px;
+    position: absolute;
+    top: 58px;
+    transform: translate(var(--burst-x), var(--burst-y)) rotate(45deg) scale(0);
+    width: 14px;
+}
+
+.attack-effect i:nth-child(1) { --burst-x: -52px; --burst-y: -44px; }
+.attack-effect i:nth-child(2) { --burst-x: 5px; --burst-y: -58px; }
+.attack-effect i:nth-child(3) { --burst-x: 48px; --burst-y: -33px; }
+.attack-effect i:nth-child(4) { --burst-x: 59px; --burst-y: 14px; }
+.attack-effect i:nth-child(5) { --burst-x: 35px; --burst-y: 50px; }
+.attack-effect i:nth-child(6) { --burst-x: -8px; --burst-y: 58px; }
+.attack-effect i:nth-child(7) { --burst-x: -51px; --burst-y: 35px; }
+.attack-effect i:nth-child(8) { --burst-x: -62px; --burst-y: 3px; }
+
+.attack-effect b {
+    animation: hit-label 560ms steps(3, end) forwards;
+    background: #fff4cf;
+    border: 3px solid #29202c;
+    box-shadow: 4px 4px 0 #29202c;
+    color: #29202c;
+    font-family: "DM Mono", monospace;
+    font-size: 0.72rem;
+    left: 38px;
+    padding: 0.28rem 0.4rem;
+    position: absolute;
+    top: 48px;
+}
+
+.attack-effect-fire { --impact: #f2663e; }
+.attack-effect-water { --impact: #48b8e0; }
+.attack-effect-grass,
+.attack-effect-bug { --impact: #8bcc4f; }
+.attack-effect-electric { --impact: #f7d938; }
+.attack-effect-psychic,
+.attack-effect-poison { --impact: #d46ed8; }
+.attack-effect-rock,
+.attack-effect-ground { --impact: #bb8955; }
+.attack-effect-flying { --impact: #b8e3ea; }
+.attack-effect-dark { --impact: #79658e; }
+
+.battle-move-callout {
+    animation: move-callout 620ms steps(5, end) forwards;
+    background: #fff4cf;
+    border: 4px solid #26202a;
+    bottom: 1.5rem;
+    box-shadow: 5px 5px 0 #26202a;
+    font-family: "DM Mono", monospace;
+    font-size: 0.62rem;
+    left: 50%;
+    padding: 0.6rem 0.8rem;
+    position: absolute;
+    text-transform: uppercase;
+    transform: translateX(-50%);
+    z-index: 9;
+}
+
+.battle-move-callout strong {
+    font-size: 0.82rem;
+}
+
+@keyframes pokemon-lunge {
+    0%, 100% { transform: translate(0); }
+    38% { transform: translate(42px, -20px); }
+    55% { transform: translate(54px, -24px); }
+}
+
+@keyframes pokemon-hit {
+    0%, 100% { filter: none; transform: translate(0); }
+    25% { filter: brightness(3); transform: translate(8px, -2px); }
+    40% { filter: brightness(.4); transform: translate(-7px, 2px); }
+    55% { filter: brightness(2.4); transform: translate(5px, 0); }
+}
+
+@keyframes pixel-burst {
+    0% { opacity: 0; transform: translate(0, 0) rotate(45deg) scale(0); }
+    22% { opacity: 1; transform: translate(0, 0) rotate(45deg) scale(1.25); }
+    75% { opacity: 1; transform: translate(var(--burst-x), var(--burst-y)) rotate(45deg) scale(1); }
+    100% { opacity: 0; transform: translate(var(--burst-x), var(--burst-y)) rotate(45deg) scale(0); }
+}
+
+@keyframes hit-label {
+    0%, 15% { opacity: 0; transform: scale(0); }
+    28%, 70% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.4); }
+}
+
+@keyframes move-callout {
+    0% { opacity: 0; transform: translate(-50%, 12px); }
+    18%, 75% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -8px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
