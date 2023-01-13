@@ -2,7 +2,7 @@ import { getSpecies } from "game/data/species";
 import { Move, Pokemon, PokemonType } from "game/types";
 
 const advantages: Record<PokemonType, PokemonType[]> = {
-    normal: [], fire: ["grass", "bug"], water: ["fire", "rock", "ground"], grass: ["water", "rock", "ground"], electric: ["water", "flying"], bug: ["grass", "psychic", "dark"], poison: ["grass"], ground: ["fire", "electric", "rock"], flying: ["grass", "bug"], psychic: ["poison"], rock: ["fire", "bug", "flying"], dark: ["psychic"]
+    normal: [], fire: ["grass", "bug", "steel"], water: ["fire", "rock", "ground"], grass: ["water", "rock", "ground"], electric: ["water", "flying"], bug: ["grass", "psychic", "dark"], poison: ["grass", "fairy"], ground: ["fire", "electric", "rock", "steel"], flying: ["grass", "bug", "fighting"], psychic: ["poison", "fighting"], rock: ["fire", "bug", "flying"], dark: ["psychic"], fairy: ["dark", "fighting"], fighting: ["normal", "rock", "dark", "steel"], steel: ["rock", "fairy"]
 };
 
 export const typeMultiplier = (moveType: PokemonType, defender: Pokemon) => {

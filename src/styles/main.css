@@ -648,6 +648,9 @@ a:focus-visible {
 .type-psychic { --type-color: #a44f72; }
 .type-rock { --type-color: #6e665a; }
 .type-dark { --type-color: #49413e; }
+.type-fairy { --type-color: #c76d9a; }
+.type-fighting { --type-color: #a54739; }
+.type-steel { --type-color: #5e7f88; }
 
 .pokemon-card {
     background: rgba(255, 255, 255, 0.38);
@@ -1915,6 +1918,34 @@ a:focus-visible {
         grid-column: auto;
     }
 }
+
+.intro-pokemon {
+    align-items: flex-end;
+    bottom: 10.5rem;
+    display: flex;
+    height: 180px;
+    justify-content: center;
+    left: 2rem;
+    position: absolute;
+    right: 2rem;
+    z-index: 1;
+}
+
+.intro-pokemon img {
+    filter: drop-shadow(5px 7px 0 rgba(0, 0, 0, .32));
+    height: 120px;
+    image-rendering: pixelated;
+    margin: 0 -18px;
+    object-fit: contain;
+    transform: translateY(var(--pokemon-y, 0));
+    width: 120px;
+}
+
+.intro-pokemon img:nth-child(1) { --pokemon-y: -18px; z-index: 4; }
+.intro-pokemon img:nth-child(2) { --pokemon-y: 4px; z-index: 3; }
+.intro-pokemon img:nth-child(3) { --pokemon-y: -3px; z-index: 2; }
+.intro-pokemon img:nth-child(4) { --pokemon-y: 8px; z-index: 1; }
+.intro-pokemon img:nth-child(5) { --pokemon-y: 14px; }
 
 /* Regional Pokédex */
 .pokedex-shell {

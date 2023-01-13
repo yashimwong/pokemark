@@ -1,4 +1,4 @@
-export type PokemonType = "normal" | "fire" | "water" | "grass" | "electric" | "bug" | "poison" | "ground" | "flying" | "psychic" | "rock" | "dark";
+export type PokemonType = "normal" | "fire" | "water" | "grass" | "electric" | "bug" | "poison" | "ground" | "flying" | "psychic" | "rock" | "dark" | "fairy" | "fighting" | "steel";
 
 export type MoveCategory = "physical" | "special" | "status";
 

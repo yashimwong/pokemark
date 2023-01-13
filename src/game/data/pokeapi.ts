@@ -3,7 +3,7 @@ import { hydrateSpecies, pokemonDefinitions } from "game/data/species";
 import { Move, MoveCategory, PokemonSpecies, PokemonType } from "game/types";
 
 const apiBaseUrl = "https://pokeapi.co/api/v2";
-const supportedTypes: PokemonType[] = ["normal", "fire", "water", "grass", "electric", "bug", "poison", "ground", "flying", "psychic", "rock", "dark"];
+const supportedTypes: PokemonType[] = ["normal", "fire", "water", "grass", "electric", "bug", "poison", "ground", "flying", "psychic", "rock", "dark", "fairy", "fighting", "steel"];
 const supportedCategories: MoveCategory[] = ["physical", "special", "status"];
 
 type NamedResource = { name: string };
