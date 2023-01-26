@@ -10,12 +10,12 @@ const NavigationBar = () => {
             <div className="navigation-inner">
                 <NavLink to="/" className="navigation-brand" aria-label="Pokemark home">
                     <span className="navigation-mark"><FiHexagon /></span>
-                    <span><strong>POKEMARK</strong><small>FIELD UNIT 04</small></span>
+                    <span><strong>POKÉMARK</strong><small>MEADOW VERSION</small></span>
                 </NavLink>
                 <ul className="navigation-links">
-                    <li><NavLink to="/" className={linkClass}><FiCompass /><span>Expedition</span></NavLink></li>
+                    <li><NavLink to="/" className={linkClass}><FiCompass /><span>Adventure</span></NavLink></li>
                     <li><NavLink to="/pokedex" className={linkClass}><FiBook /><span>Pokédex</span></NavLink></li>
-                    <li><NavLink to="/settings" className={linkClass}><FiSliders /><span>Field log</span></NavLink></li>
+                    <li><NavLink to="/settings" className={linkClass}><FiSliders /><span>Trainer</span></NavLink></li>
                 </ul>
                 <div className="navigation-status"><i /> {catalogSource === "loading" ? "Syncing PokéAPI" : catalogSource === "pokeapi" ? "PokéAPI online" : "Cached catalog"}</div>
             </div>

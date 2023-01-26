@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import MainContainer from "components/layout/container";
-import SpecimenPortrait from "components/game/specimen-portrait";
+import PokemonPortrait from "components/game/pokemon-portrait";
 import TypeBadge from "components/game/type-badge";
 import { getSpecies, pokemonDefinitions } from "game/data/species";
 import { useGame } from "game/context";
@@ -54,7 +54,7 @@ const Pokedex = () => {
                         <div className="pokedex-screen">
                             <div className="pokedex-scanlines" aria-hidden="true" />
                             <span className="pokedex-screen-number">NO. {selected.number}</span>
-                            <SpecimenPortrait specimen={selected} size="starter" />
+                            <PokemonPortrait pokemon={selected} size="starter" />
                             <div className="pokedex-screen-name">
                                 <span>{owned ? "● CAUGHT" : "○ NOT CAUGHT"}</span>
                                 <h2>{selected.name}</h2>
