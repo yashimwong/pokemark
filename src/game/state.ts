@@ -1,6 +1,6 @@
 import { createPokemon, getSpecies } from "game/data/species";
 import { getMove } from "game/data/moves";
-import { townMap, trainers, wildEncounterIds, isWalkable } from "game/data/world";
+import { getWorldMap, isWalkable, WorldMap } from "game/data/world";
 import { calculateDamage, healthyPokemonIndex, isFainted, typeMultiplier } from "game/battle";
 import { grassEncounterChance, maxPartySize, experienceForLevel } from "game/constants";
 import { BattleParticipant, BattleState, GameState, Move, Pokemon, Trainer } from "game/types";
@@ -8,10 +8,12 @@ import { BattleParticipant, BattleState, GameState, Move, Pokemon, Trainer } fro
 export const initialGameState: GameState = {
     screen: "intro",
     trainerName: "",
+    currentMapId: "meadow-town",
     playerPosition: { x: 7, y: 9 },
     party: [],
     storage: [],
     money: 300,
+    pokeballs: 5,
     badges: [],
     defeatedTrainers: []
 };
@@ -25,9 +27,11 @@ export const chooseStarter = (state: GameState, speciesId: string): GameState =>
     notice: `Professor Oakwood gave you ${getSpecies(speciesId).name}!`
 });
 
-const makeWildOpponent = (): BattleParticipant => {
-    const speciesId = wildEncounterIds[Math.floor(Math.random() * wildEncounterIds.length)];
-    return { kind: "wild", pokemon: [createPokemon(speciesId, 3 + Math.floor(Math.random() * 4))] };
+const makeWildOpponent = (map: WorldMap): BattleParticipant => {
+    const speciesId = map.wildEncounterIds[Math.floor(Math.random() * map.wildEncounterIds.length)];
+    const [minimumLevel, maximumLevel] = map.wildLevels;
+    const level = minimumLevel + Math.floor(Math.random() * (maximumLevel - minimumLevel + 1));
+    return { kind: "wild", pokemon: [createPokemon(speciesId, level)] };
 };
 
 const beginBattle = (state: GameState, opponent: BattleParticipant): GameState => ({
@@ -39,15 +43,26 @@ const beginBattle = (state: GameState, opponent: BattleParticipant): GameState =
 
 export const movePlayer = (state: GameState, dx: number, dy: number): GameState => {
     if (state.screen !== "overworld" || !state.party.length || state.battle) return state;
+    const map = getWorldMap(state.currentMapId);
     const x = state.playerPosition.x + dx;
     const y = state.playerPosition.y + dy;
-    const tile = townMap[y]?.[x];
+    const tile = map.tiles[y]?.[x];
     if (!tile || !isWalkable(tile)) return { ...state, notice: "You cannot go that way." };
-    const trainer = trainers.find((item) => item.x === x && item.y === y && !state.defeatedTrainers.includes(item.id));
+    const exit = map.exits.find((item) => item.x === x && item.y === y);
+    if (exit) {
+        const destination = getWorldMap(exit.to);
+        return { ...state, currentMapId: exit.to, playerPosition: exit.entry, notice: `Entered ${destination.name}.` };
+    }
+    const trainer = map.trainers.find((item) => item.x === x && item.y === y && !state.defeatedTrainers.includes(item.id));
     if (trainer) return beginBattle(state, { kind: "trainer", trainer, pokemon: trainer.pokemon.map((pokemon) => ({ ...pokemon })) });
-    const movedState = { ...state, playerPosition: { x, y }, notice: tile === "healing" ? "Your party was fully healed!" : tile === "sign" ? "Meadow Town: where every path begins." : undefined };
+    const movedState: GameState = {
+        ...state,
+        screen: tile === "shop" ? "shop" : state.screen,
+        playerPosition: { x, y },
+        notice: tile === "healing" ? "Your party was fully healed!" : tile === "sign" ? map.signMessage : undefined
+    };
     const healedState = tile === "healing" ? { ...movedState, party: movedState.party.map((pokemon) => ({ ...pokemon, hp: pokemon.maxHp })) } : movedState;
-    return tile === "grass" && Math.random() < grassEncounterChance ? beginBattle(healedState, makeWildOpponent()) : healedState;
+    return tile === "grass" && Math.random() < grassEncounterChance ? beginBattle(healedState, makeWildOpponent(map)) : healedState;
 };
 
 export const startTrainerBattle = (state: GameState, trainer: Trainer) => beginBattle(state, { kind: "trainer", trainer, pokemon: trainer.pokemon.map((pokemon) => ({ ...pokemon })) });
@@ -70,6 +85,18 @@ const levelUp = (pokemon: Pokemon, earnedExperience: number): Pokemon => {
     }
     return nextPokemon;
 };
+
+const recoverAtMeadow = (state: GameState, party: Pokemon[], notice: string, pokeballs = state.pokeballs): GameState => ({
+    ...state,
+    party: party.map((pokemon) => ({ ...pokemon, hp: pokemon.maxHp })),
+    pokeballs,
+    currentMapId: "meadow-town",
+    screen: "overworld",
+    battle: undefined,
+    playerPosition: { x: 7, y: 9 },
+    money: Math.max(0, state.money - 100),
+    notice
+});
 
 const advanceOpponent = (state: GameState, party: Pokemon[], battle: BattleState, defeatedName: string): GameState => {
     const nextIndex = healthyPokemonIndex(battle.opponent.pokemon);
@@ -102,7 +129,7 @@ export const useMove = (state: GameState, move: Move): GameState => {
     const message = `${player.nickname} used ${move.name}! ${effectiveness > 1 ? "It's super effective! " : effectiveness < 1 ? "It's not very effective. " : ""}${updatedOpponent.nickname} used ${opponentMove.name}!`;
     if (isFainted(updatedPlayer)) {
         const nextIndex = healthyPokemonIndex(party);
-        if (nextIndex < 0) return { ...state, party, screen: "overworld", battle: undefined, playerPosition: { x: 7, y: 9 }, money: Math.max(0, state.money - 100), notice: "Your party rushed back to the healing station." };
+        if (nextIndex < 0) return recoverAtMeadow(state, party, "Your party rushed back to the Meadow Town healing station.");
         return { ...state, party, battle: { ...updatedBattle, activePlayerIndex: nextIndex, message: `${updatedPlayer.nickname} fainted! Go, ${party[nextIndex].nickname}!`, turn: "player" } };
     }
     return { ...state, party, battle: { ...updatedBattle, message, turn: "player" } };
@@ -119,13 +146,41 @@ export const runFromBattle = (state: GameState): GameState => state.battle?.canR
 export const catchPokemon = (state: GameState): GameState => {
     const battle = state.battle;
     if (!battle || battle.opponent.kind === "trainer") return state;
+    if (state.pokeballs <= 0) return { ...state, battle: { ...battle, message: "You are out of Poké Balls! Visit the Meadow Town shop.", turn: "player" } };
     const pokemon = battle.opponent.pokemon[battle.activeOpponentIndex];
     if (!pokemon) return { ...state, screen: "overworld", battle: undefined, notice: "The encounter data was incomplete. Returning to the field." };
-    const chance = 0.3 + (1 - pokemon.hp / pokemon.maxHp) * 0.6;
-    if (Math.random() > chance) return { ...state, battle: { ...battle, message: `Oh no! ${pokemon.nickname} broke free!`, turn: "player" } };
+    const player = state.party[battle.activePlayerIndex];
+    if (!player) return { ...state, screen: "overworld", battle: undefined, notice: "The encounter data was incomplete. Returning to the field." };
+    const healthBonus = (1 - pokemon.hp / pokemon.maxHp) * 0.65;
+    const levelBonus = Math.max(-0.08, Math.min(0.08, (player.level - pokemon.level) * 0.02));
+    const chance = Math.max(0.15, Math.min(0.9, 0.25 + healthBonus + levelBonus));
+    const pokeballs = state.pokeballs - 1;
+    if (Math.random() > chance) {
+        const opponentMove = pokemon.moves[Math.floor(Math.random() * pokemon.moves.length)] || getMove("tackle");
+        const counterDamage = calculateDamage(pokemon, player, opponentMove);
+        const updatedPlayer = { ...player, hp: Math.max(0, player.hp - counterDamage) };
+        const party = state.party.map((item, index) => index === battle.activePlayerIndex ? updatedPlayer : item);
+        if (isFainted(updatedPlayer)) {
+            const nextIndex = healthyPokemonIndex(party);
+            if (nextIndex < 0) {
+                return recoverAtMeadow(state, party, `${pokemon.nickname} broke free! Your party rushed back to Meadow Town.`, pokeballs);
+            }
+            return { ...state, party, pokeballs, battle: { ...battle, activePlayerIndex: nextIndex, message: `${pokemon.nickname} broke free and used ${opponentMove.name}! Go, ${party[nextIndex].nickname}!`, turn: "player" } };
+        }
+        return { ...state, party, pokeballs, battle: { ...battle, message: `${pokemon.nickname} broke free and used ${opponentMove.name}!`, turn: "player" } };
+    }
     const party = state.party.length < maxPartySize ? [...state.party, pokemon] : state.party;
     const storage = state.party.length < maxPartySize ? state.storage : [...state.storage, pokemon];
-    return { ...state, party, storage, screen: "overworld", battle: undefined, notice: `${pokemon.nickname} was caught!` };
+    const destination = state.party.length < maxPartySize ? "joined your party" : "was sent to storage";
+    return { ...state, party, storage, pokeballs, screen: "overworld", battle: undefined, notice: `${pokemon.nickname} was caught and ${destination}!` };
 };
+
+export const buyPokeballs = (state: GameState, quantity: number, price: number): GameState => {
+    if (state.screen !== "shop") return state;
+    if (state.money < price) return { ...state, notice: `You need ₽ ${price - state.money} more for that pack.` };
+    return { ...state, money: state.money - price, pokeballs: state.pokeballs + quantity, notice: `Bought ${quantity} Poké Ball${quantity === 1 ? "" : "s"}!` };
+};
+
+export const leaveShop = (state: GameState): GameState => ({ ...state, screen: "overworld", notice: undefined });
 
 export const dismissNotice = (state: GameState): GameState => ({ ...state, notice: undefined });

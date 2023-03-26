@@ -41,7 +41,7 @@ const BattleScreen = ({ game, onFight, onSwitch, onCatch, onRun }: { game: GameS
             </div>
             <div className="battle-console">
                 <div className="battle-message"><span>BATTLE TEXT</span><p>{battle.message}</p></div>
-                {switching ? <div className="battle-switcher"><p>Choose a Pokémon.</p><div className="battle-switcher-grid">{game.party.map((pokemon, index) => <PokemonCard key={pokemon.uid} pokemon={pokemon} active={index === battle.activePlayerIndex} onClick={() => { onSwitch(index); setSwitching(false); }} />)}</div><button type="button" onClick={() => setSwitching(false)} className="battle-back"><FiArrowLeft /> Back</button></div> : <BattleActions moves={player.moves} canCatch={battle.opponent.kind === "wild"} canRun={battle.canRun} disabled={Boolean(attack)} onFight={fight} onCatch={onCatch} onRun={onRun} onSwitch={() => setSwitching(true)} />}
+                {switching ? <div className="battle-switcher"><p>Choose a Pokémon.</p><div className="battle-switcher-grid">{game.party.map((pokemon, index) => <PokemonCard key={pokemon.uid} pokemon={pokemon} active={index === battle.activePlayerIndex} onClick={() => { onSwitch(index); setSwitching(false); }} />)}</div><button type="button" onClick={() => setSwitching(false)} className="battle-back"><FiArrowLeft /> Back</button></div> : <BattleActions moves={player.moves} canCatch={battle.opponent.kind === "wild"} canRun={battle.canRun} pokeballs={game.pokeballs} disabled={Boolean(attack)} onFight={fight} onCatch={onCatch} onRun={onRun} onSwitch={() => setSwitching(true)} />}
             </div>
         </div>
     );

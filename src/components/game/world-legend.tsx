@@ -5,6 +5,8 @@ const WorldLegend = () => (
         <span><img src="/sprites/trainer.svg" alt="" /> Trainer</span>
         <span><img src="/sprites/player.svg" alt="" /> You</span>
         <span><img src="/tiles/healing.svg" alt="" /> Poké Center</span>
+        <span><img src="/tiles/shop.svg" alt="" /> Poké Mart</span>
+        <span><img src="/tiles/gate.svg" alt="" /> Map exit</span>
     </div>
 );
 

@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react";
 import { loadPokeApiCatalog } from "game/data/pokeapi";
-import { chooseStarter, initialGameState, movePlayer, runFromBattle, setTrainerName, switchPokemon, useMove, catchPokemon, dismissNotice } from "game/state";
+import { buyPokeballs, catchPokemon, chooseStarter, dismissNotice, initialGameState, leaveShop, movePlayer, runFromBattle, setTrainerName, switchPokemon, useMove } from "game/state";
 import { GameState, Move } from "game/types";
 
 type GameContextValue = {
@@ -13,6 +13,8 @@ type GameContextValue = {
     switchPartyMember: (index: number) => void;
     run: () => void;
     catchWildPokemon: () => void;
+    purchasePokeballs: (quantity: number, price: number) => void;
+    exitShop: () => void;
     clearNotice: () => void;
 };
 
@@ -40,6 +42,8 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
         switchPartyMember: (index: number) => setGame((state) => switchPokemon(state, index)),
         run: () => setGame((state) => runFromBattle(state)),
         catchWildPokemon: () => setGame((state) => catchPokemon(state)),
+        purchasePokeballs: (quantity: number, price: number) => setGame((state) => buyPokeballs(state, quantity, price)),
+        exitShop: () => setGame((state) => leaveShop(state)),
         clearNotice: () => setGame((state) => dismissNotice(state))
     }), [game, catalogSource]);
 

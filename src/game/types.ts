@@ -47,6 +47,8 @@ export type PlayerPosition = {
     y: number;
 };
 
+export type WorldMapId = "meadow-town" | "birch-trail" | "moonrise-cove" | "ember-ridge";
+
 export type Trainer = {
     id: string;
     name: string;
@@ -75,15 +77,17 @@ export type BattleState = {
     canRun: boolean;
 };
 
-export type GameScreen = "overworld" | "battle" | "starter" | "intro";
+export type GameScreen = "overworld" | "battle" | "starter" | "intro" | "shop";
 
 export type GameState = {
     screen: GameScreen;
     trainerName: string;
+    currentMapId: WorldMapId;
     playerPosition: PlayerPosition;
     party: Pokemon[];
     storage: Pokemon[];
     money: number;
+    pokeballs: number;
     badges: string[];
     defeatedTrainers: string[];
     battle?: BattleState;

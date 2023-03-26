@@ -815,6 +815,8 @@ a:focus-visible {
 .tile-lab { background: #6d746d; color: #e5e1d6; letter-spacing: 0.05em; }
 .tile-healing { background: #b86656; color: #fff4e8; font-size: 1rem; font-weight: 500; }
 .tile-bridge { background: repeating-linear-gradient(90deg, #81694f 0 8px, #755f48 8px 10px); }
+.tile-shop,
+.tile-gate { background: #c2bba8; }
 
 .tile-grass::before,
 .tile-flower::before {
@@ -1082,6 +1084,151 @@ a:focus-visible {
     background: var(--ink);
     display: block;
     height: 100%;
+}
+
+.shop-shell {
+    background: #fff5cf;
+    border: 4px solid var(--ink);
+    box-shadow: 9px 9px 0 var(--ink);
+    margin: 1rem auto;
+    max-width: 1000px;
+    padding: 2rem;
+    width: calc(100% - 1rem);
+}
+
+.shop-header {
+    align-items: flex-end;
+    border-bottom: 4px solid var(--ink);
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    padding-bottom: 1.5rem;
+}
+
+.shop-header .eyebrow,
+.shop-wallet strong {
+    align-items: center;
+    display: flex;
+    gap: .45rem;
+}
+
+.shop-header h1 {
+    font-size: clamp(1.2rem, 3vw, 2.2rem);
+    line-height: 1.4;
+    margin-top: .65rem;
+}
+
+.shop-header > div:first-child > p:last-child {
+    color: var(--muted);
+    font-size: .72rem;
+    margin-top: .65rem;
+}
+
+.shop-wallet {
+    background: #34344d;
+    border: 4px solid var(--ink);
+    color: #fff5cf;
+    display: grid;
+    flex: 0 0 190px;
+    gap: .45rem 1rem;
+    grid-template-columns: 1fr auto;
+    padding: 1rem;
+}
+
+.shop-wallet span {
+    color: var(--acid);
+    font-family: "DM Mono", monospace;
+    font-size: .5rem;
+}
+
+.shop-wallet strong {
+    font-family: "DM Mono", monospace;
+    font-size: .7rem;
+    justify-content: flex-end;
+}
+
+.shop-counter {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 1.5rem;
+}
+
+.shop-item {
+    background: #f5e7bc;
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 #77705a;
+    padding: 1.2rem;
+}
+
+.shop-ball {
+    align-items: center;
+    background: var(--signal);
+    border: 3px solid var(--ink);
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    font-size: 2rem;
+    height: 64px;
+    justify-content: center;
+    margin-bottom: 1rem;
+    width: 64px;
+}
+
+.shop-item > p {
+    color: #6d654d;
+    font-family: "DM Mono", monospace;
+    font-size: .52rem;
+    letter-spacing: .05em;
+}
+
+.shop-item h2 {
+    font-size: .72rem;
+    line-height: 1.5;
+    margin-top: .55rem;
+}
+
+.shop-item > span {
+    display: block;
+    font-size: .66rem;
+    line-height: 1.6;
+    margin-top: .7rem;
+    min-height: 3.2rem;
+}
+
+.shop-item button,
+.shop-leave {
+    background: #f6d64a;
+    border: 3px solid var(--ink);
+    box-shadow: 3px 3px 0 var(--ink);
+    color: var(--ink);
+    font-family: "DM Mono", monospace;
+    font-size: .58rem;
+    font-weight: 800;
+    padding: .75rem;
+    text-transform: uppercase;
+}
+
+.shop-item button {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.shop-item button:hover:not(:disabled),
+.shop-leave:hover {
+    background: var(--acid);
+    transform: translate(2px, 2px);
+}
+
+.shop-item button:disabled {
+    opacity: .42;
+}
+
+.shop-leave {
+    align-items: center;
+    display: flex;
+    gap: .5rem;
+    margin-top: 1.5rem;
 }
 
 .battle-shell {
@@ -3113,6 +3260,23 @@ a:focus-visible {
     .battle-scene::before,
     .battle-scene::after {
         width: 150px;
+    }
+
+    .shop-shell {
+        padding: 1rem;
+    }
+
+    .shop-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .shop-wallet {
+        flex-basis: auto;
+    }
+
+    .shop-counter {
+        grid-template-columns: 1fr;
     }
 
     .attack-effect {
