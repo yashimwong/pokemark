@@ -3118,6 +3118,222 @@ a:focus-visible {
     color: var(--acid);
 }
 
+.battle-pokemon-catching .pokemon-portrait {
+    animation: pokemon-capture 1100ms steps(8, end) both;
+}
+
+.catch-sequence,
+.trainer-challenge {
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 15;
+}
+
+.catch-sequence {
+    --throw-start-x: clamp(-270px, -31vw, -125px);
+    --throw-target-x: clamp(80px, 18vw, 175px);
+}
+
+.catch-ball {
+    animation: pokeball-throw 1100ms steps(12, end) both;
+    background: linear-gradient(#e8524a 0 42%, #25243a 42% 58%, #fff5cf 58%);
+    border: 4px solid #25243a;
+    border-radius: 50%;
+    box-shadow: 4px 5px 0 rgba(25, 35, 30, .35);
+    height: 44px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    width: 44px;
+    z-index: 2;
+}
+
+.catch-ball::after {
+    background: #fff5cf;
+    border: 3px solid #25243a;
+    border-radius: 50%;
+    content: "";
+    height: 13px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 13px;
+}
+
+.catch-flash {
+    animation: catch-flash 1100ms steps(6, end) both;
+    background: #fff8b5;
+    border: 4px solid #25243a;
+    height: 92px;
+    opacity: 0;
+    position: absolute;
+    right: 18%;
+    top: 30%;
+    transform: rotate(45deg) scale(0);
+    width: 92px;
+}
+
+.catch-sequence strong {
+    animation: catch-label 1100ms steps(6, end) both;
+    background: var(--acid);
+    border: 4px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    bottom: 1.5rem;
+    font-family: "Press Start 2P", monospace;
+    font-size: .62rem;
+    left: 50%;
+    padding: .65rem .8rem;
+    position: absolute;
+    text-transform: uppercase;
+    transform: translateX(-50%);
+}
+
+.trainer-challenge {
+    align-items: center;
+    animation: trainer-curtain 1450ms steps(10, end) both;
+    background:
+        linear-gradient(115deg, transparent 0 48%, var(--acid) 48% 52%, transparent 52%),
+        repeating-linear-gradient(0deg, #25243a 0 18px, #34344d 18px 36px);
+    display: flex;
+    justify-content: center;
+}
+
+.trainer-challenge::before,
+.trainer-challenge::after {
+    background: var(--acid);
+    border: 4px solid #11111c;
+    content: "";
+    height: 14px;
+    position: absolute;
+    width: 42%;
+}
+
+.trainer-challenge::before {
+    left: 0;
+    top: 17%;
+}
+
+.trainer-challenge::after {
+    bottom: 17%;
+    right: 0;
+}
+
+.trainer-challenge-card {
+    align-items: center;
+    animation: trainer-card-in 1450ms steps(10, end) both;
+    background: #fff5cf;
+    border: 5px solid #11111c;
+    box-shadow: 8px 8px 0 #e8524a;
+    display: grid;
+    gap: .45rem 1rem;
+    grid-template-columns: 88px minmax(150px, 1fr);
+    padding: .85rem 1rem;
+    position: relative;
+    text-transform: uppercase;
+    z-index: 2;
+}
+
+.trainer-challenge-card span,
+.trainer-challenge-card small {
+    font-family: "DM Mono", monospace;
+    font-size: .48rem;
+    letter-spacing: .08em;
+}
+
+.trainer-challenge-card span {
+    color: #e8524a;
+    grid-column: 2;
+}
+
+.trainer-challenge-card img {
+    grid-row: 1 / 4;
+    image-rendering: pixelated;
+    width: 88px;
+}
+
+.trainer-challenge-card strong {
+    font-family: "Press Start 2P", monospace;
+    font-size: .68rem;
+    grid-column: 2;
+    line-height: 1.7;
+}
+
+.trainer-challenge-card small {
+    color: var(--muted);
+    grid-column: 2;
+}
+
+.trainer-challenge > b {
+    animation: trainer-vs 1450ms steps(10, end) both;
+    color: var(--acid);
+    font-family: "Press Start 2P", monospace;
+    font-size: 2.2rem;
+    position: absolute;
+    text-shadow: 5px 5px 0 #e8524a;
+    transform: rotate(-8deg);
+    z-index: 3;
+}
+
+.battle-shell-trainer .battle-pokemon-opposing {
+    animation: trainer-opponent-ready 500ms steps(5, end) 950ms both;
+}
+
+@keyframes pokeball-throw {
+    0% { opacity: 0; transform: translate(var(--throw-start-x), 150px) rotate(0); }
+    8% { opacity: 1; }
+    40% { transform: translate(var(--throw-target-x), -85px) rotate(540deg); }
+    52% { transform: translate(var(--throw-target-x), -20px) rotate(630deg); }
+    64% { transform: translate(calc(var(--throw-target-x) - 12px), -20px) rotate(610deg); }
+    76% { transform: translate(calc(var(--throw-target-x) + 12px), -20px) rotate(650deg); }
+    88% { transform: translate(calc(var(--throw-target-x) - 8px), -20px) rotate(620deg); }
+    100% { opacity: 1; transform: translate(var(--throw-target-x), -20px) rotate(630deg); }
+}
+
+@keyframes pokemon-capture {
+    0%, 38% { filter: none; opacity: 1; transform: scale(1); }
+    48% { filter: brightness(4); opacity: 1; transform: scale(1.08); }
+    65%, 99% { filter: brightness(2); opacity: 0; transform: translate(-18px, 45px) scale(.05); }
+    100% { filter: none; opacity: 1; transform: scale(1); }
+}
+
+@keyframes catch-flash {
+    0%, 35%, 100% { opacity: 0; transform: rotate(45deg) scale(0); }
+    44% { opacity: .92; transform: rotate(45deg) scale(1); }
+    58% { opacity: 0; transform: rotate(45deg) scale(1.7); }
+}
+
+@keyframes catch-label {
+    0%, 8% { opacity: 0; transform: translate(-50%, 12px); }
+    18%, 82% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -8px); }
+}
+
+@keyframes trainer-curtain {
+    0% { clip-path: inset(50% 0 50%); }
+    14%, 72% { clip-path: inset(0); opacity: 1; }
+    100% { clip-path: inset(0); opacity: 0; }
+}
+
+@keyframes trainer-card-in {
+    0%, 10% { opacity: 0; transform: translateX(90vw) skewX(-8deg); }
+    28%, 72% { opacity: 1; transform: translateX(0) skewX(-8deg); }
+    100% { opacity: 0; transform: translateX(-90vw) skewX(-8deg); }
+}
+
+@keyframes trainer-vs {
+    0%, 25% { opacity: 0; transform: rotate(-8deg) scale(3); }
+    38%, 72% { opacity: 1; transform: rotate(-8deg) scale(1); }
+    100% { opacity: 0; transform: rotate(-8deg) scale(.4); }
+}
+
+@keyframes trainer-opponent-ready {
+    0% { opacity: 0; transform: translateX(120px); }
+    65% { opacity: 1; transform: translateX(-12px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
 .field-notice {
     background: #fff5cf;
     border: 4px solid var(--ink);

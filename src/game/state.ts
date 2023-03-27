@@ -76,7 +76,13 @@ const replaceBattlePokemon = (battle: BattleState, side: "player" | "opponent", 
 const levelUp = (pokemon: Pokemon, earnedExperience: number): Pokemon => {
     let nextPokemon = { ...pokemon, experience: pokemon.experience + earnedExperience };
     while (nextPokemon.experience >= experienceForLevel(nextPokemon.level)) {
-        nextPokemon = { ...nextPokemon, level: nextPokemon.level + 1, maxHp: nextPokemon.maxHp + 3, hp: Math.min(nextPokemon.maxHp + 3, nextPokemon.hp + 5) };
+        nextPokemon = {
+            ...nextPokemon,
+            experience: nextPokemon.experience - experienceForLevel(nextPokemon.level),
+            level: nextPokemon.level + 1,
+            maxHp: nextPokemon.maxHp + 3,
+            hp: Math.min(nextPokemon.maxHp + 3, nextPokemon.hp + 5)
+        };
         const currentSpecies = getSpecies(nextPokemon.speciesId);
         if (currentSpecies.evolvesTo && currentSpecies.evolutionLevel === nextPokemon.level) {
             const evolved = getSpecies(currentSpecies.evolvesTo);

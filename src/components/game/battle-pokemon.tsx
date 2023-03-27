@@ -5,10 +5,10 @@ import TypeBadge from "components/game/type-badge";
 import { getSpecies } from "game/data/species";
 import { Pokemon, PokemonType } from "game/types";
 
-const BattlePokemon = ({ pokemon, opposing, attacking, hitType }: { pokemon: Pokemon; opposing?: boolean; attacking?: boolean; hitType?: PokemonType }) => {
+const BattlePokemon = ({ pokemon, opposing, attacking, catching, hitType }: { pokemon: Pokemon; opposing?: boolean; attacking?: boolean; catching?: boolean; hitType?: PokemonType }) => {
     const currentSpecies = getSpecies(pokemon.speciesId);
     return (
-        <div className={`battle-pokemon ${opposing ? "battle-pokemon-opposing" : ""} ${attacking ? "battle-pokemon-attacking" : ""} ${hitType ? "battle-pokemon-hit" : ""}`}>
+        <div className={`battle-pokemon ${opposing ? "battle-pokemon-opposing" : ""} ${attacking ? "battle-pokemon-attacking" : ""} ${catching ? "battle-pokemon-catching" : ""} ${hitType ? "battle-pokemon-hit" : ""}`}>
             <PokemonPortrait pokemon={currentSpecies} size="battle" opposing={opposing} />
             {hitType && <AttackEffect type={hitType} />}
             <div className="battle-status">
